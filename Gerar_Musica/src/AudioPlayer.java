@@ -3,16 +3,16 @@ import org.jfugue.pattern.Pattern;
 import org.jfugue.player.Player;
 
 public class AudioPlayer {
-	private String Musica;
+	private static Musica Musica;
 	
-	public AudioPlayer(String Musica) {
-		this.Musica = Musica;		
+	public AudioPlayer(String MusicaParaTocar) {
+		Musica = new Musica(MusicaParaTocar);		
 	}
 	
 	public void TocarMusica() {
 		Player player = new Player();
-		Pattern padraoMusical = new Pattern(this.Musica); 
+		String PadraoDaMusica = Musica.getMusicaString();
+		Pattern padraoMusical = new Pattern(PadraoDaMusica); 
 		player.play(padraoMusical);
 	}
-
 }

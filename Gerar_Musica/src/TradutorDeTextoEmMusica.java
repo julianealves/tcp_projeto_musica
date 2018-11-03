@@ -5,10 +5,22 @@ public class TradutorDeTextoEmMusica {
 	private static Dicionario DicionarioDeNotas;
 	
 
-	public TradutorDeTextoEmMusica(String TextoBruto) {
-		this.TextoBruto = TextoBruto.toUpperCase();
+	public TradutorDeTextoEmMusica() {
+		this.TextoBruto = "";
 		this.TextoTraduzido = "";	
 		DicionarioDeNotas = new Dicionario();
+	}
+	
+	public void setTextoBruto(String TextoBruto) {
+		this.TextoBruto = TextoBruto.toUpperCase();		
+	}
+	
+	public String getTextoBruto() {
+		return this.TextoBruto;
+	}
+	
+	public String getTextoTraduzido() {
+		return this.TextoTraduzido;
 	}
 	
 	public String TraduzirTextoEmMusica() {
@@ -21,12 +33,14 @@ public class TradutorDeTextoEmMusica {
 			caractere = this.TextoBruto.charAt(indice);
 			NotaMusical = DicionarioDeNotas.TraduzirCaractere(String.valueOf(caractere));
 			
-			if (this.TextoTraduzido.isEmpty()) {
-				this.TextoTraduzido = NotaMusical;
-			}
-			else {
-				//Eh necessario ter um espaco entre as notas musicais
-				this.TextoTraduzido = this.TextoTraduzido + " " + NotaMusical; 
+			if (!NotaMusical.equals("none")) {
+				if (this.TextoTraduzido.isEmpty()) {
+					this.TextoTraduzido = NotaMusical;
+				}
+				else {
+					//Eh necessario ter um espaco entre as notas musicais
+					this.TextoTraduzido = this.TextoTraduzido + " " + NotaMusical; 
+				}
 			}
 		}
 		

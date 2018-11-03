@@ -5,8 +5,12 @@ import org.jfugue.player.Player;
 public class AudioPlayer {
 	private static Musica Musica;
 	
-	public AudioPlayer(String MusicaParaTocar) {
-		Musica = new Musica(MusicaParaTocar);		
+	public AudioPlayer() {
+		Musica = new Musica();	
+	}
+	
+	public void setMusica(String MusicaParaTocar) {
+		Musica.ComporMusica(MusicaParaTocar);
 	}
 	
 	public void TocarMusica() {

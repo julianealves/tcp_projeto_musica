@@ -17,13 +17,15 @@ public class InterfaceDoSistema {
 		String TextoDigitado = LerDoTeclado.nextLine();
 		LerDoTeclado.close();
 		
-		TradutorDeTexto = new TradutorDeTextoEmMusica(TextoDigitado);
+		TradutorDeTexto = new TradutorDeTextoEmMusica();
+		TradutorDeTexto.setTextoBruto(TextoDigitado);
 		String TextoTraduzido = TradutorDeTexto.TraduzirTextoEmMusica();
 		
 		System.out.println("Texto traduzido: ");
 		System.out.println(TextoTraduzido);
 		
-		PlayerDeAudio = new AudioPlayer(TextoTraduzido);
+		PlayerDeAudio = new AudioPlayer();
+		PlayerDeAudio.setMusica(TextoTraduzido);
 		PlayerDeAudio.TocarMusica();
 		
 	}

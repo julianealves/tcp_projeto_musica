@@ -26,7 +26,9 @@ public class Dicionario {
 		DicionarioDeNotas.put( "\r\n", new String( "TROCARINSTRUMENTO" )); //Trocar de instrumento musical
 		DicionarioDeNotas.put( "\n", new String( "TROCARINSTRUMENTO" )); //Trocar de instrumento
 		DicionarioDeNotas.put( ";", new String( "AUMENTARBPM" )); //Aumenta quantidade de batidas por minuto
-		DicionarioDeNotas.put( ",", new String( "DIMINUIRBPM" )); //Diminui quantidade de batidas por minuto		
+		DicionarioDeNotas.put( ",", new String( "DIMINUIRBPM" )); //Diminui quantidade de batidas por minuto
+		DicionarioDeNotas.put( "?", new String( "OITAVADEFAULT" )); //Coloca oitava default
+		DicionarioDeNotas.put( ".", new String( "OITAVADEFAULT" )); //Coloca oitava default	
 	}
 	
 	public String TraduzirCaractere(String caractere) {

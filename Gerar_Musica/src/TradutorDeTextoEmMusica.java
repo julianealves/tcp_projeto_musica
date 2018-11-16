@@ -49,6 +49,34 @@ public class TradutorDeTextoEmMusica {
 		return false;
 	}
 	
+	private String AlterarOitavaMusical(char CaractereAtual) {
+		if(this.DigitoPar(Character.getNumericValue(CaractereAtual))) {
+			return "AUMENTAROITAVA";
+		}
+		return "DIMINUIROITAVA";
+	}
+	
+	private String DeterminarNotaMusical(String NotaMusicalAnterior, char CaractereAnterior) {
+		if(this.CaractereAnteriorEraNotaMusical(CaractereAnterior)) {
+			return NotaMusicalAnterior;
+		}
+		return SILENCIO;
+	}
+	
+	private String DefinirNotaMusicalAtual(String NotaMusicalAnterior, char CaractereAtual, char CaractereAnterior) {
+		String NotaMusicalAtual;
+		if(Character.isDigit(CaractereAtual)) {
+			NotaMusicalAtual = AlterarOitavaMusical(CaractereAtual);
+		}
+		else if(CaractereAtual > NOTA_MUSICAL_SOL) {
+			NotaMusicalAtual = DeterminarNotaMusical(NotaMusicalAnterior, CaractereAnterior);
+		}
+		else {
+			NotaMusicalAtual = NotaMusicalAnterior;
+		}
+		return NotaMusicalAtual;
+	}
+	
 	public String TraduzirTextoEmMusica() {
 		int TamanhoDoTexto;
 		String NotaMusicalAtual, NotaMusicalAnterior;
@@ -62,36 +90,15 @@ public class TradutorDeTextoEmMusica {
 			CaractereAtual = this.TextoBruto.charAt(indice);
 			NotaMusicalAtual = DicionarioDeNotas.TraduzirCaractere(String.valueOf(CaractereAtual));
 			
-			if (!NotaMusicalAtual.equals("none")) {
-				this.InserirNotaMusical(NotaMusicalAtual);
+			if (NotaMusicalAtual.equals("none")) {
+				NotaMusicalAtual = DefinirNotaMusicalAtual(NotaMusicalAnterior, CaractereAtual, CaractereAnterior);
 			}
-			else {
-				if(Character.isDigit(CaractereAtual)) {
-					if(this.DigitoPar(Character.getNumericValue(CaractereAtual))) {
-						NotaMusicalAtual = "AUMENTAROITAVA";
-					}
-					else {
-						NotaMusicalAtual = "DIMINUIROITAVA";
-					}
-				}
-				else if(CaractereAtual > NOTA_MUSICAL_SOL) {
-					if(this.CaractereAnteriorEraNotaMusical(CaractereAnterior)) {
-						NotaMusicalAtual = NotaMusicalAnterior;
-					}
-					else {
-						NotaMusicalAtual = SILENCIO;
-					}
-				}
-				else {
-					NotaMusicalAtual = NotaMusicalAnterior;
-				}
-				this.InserirNotaMusical(NotaMusicalAtual);
-			}
+			
+			this.InserirNotaMusical(NotaMusicalAtual);
 			NotaMusicalAnterior = NotaMusicalAtual;
 			CaractereAnterior = CaractereAtual;
 		}
 		
 		return this.TextoTraduzido;
 	}
-
 }

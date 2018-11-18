@@ -19,14 +19,14 @@ public class Dicionario {
 		DicionarioDeNotas.put( "F", new String( "F" )); //Nota Fa
 		DicionarioDeNotas.put( "G", new String( "G" )); //Nota Sol
 		DicionarioDeNotas.put( " ", new String( "R" )); //Silencio/pausa
-		DicionarioDeNotas.put( "!", new String( "AUMENTARVOLUME" )); //Aumentar o volume
-		DicionarioDeNotas.put( "I", new String( "DIMINUIRVOLUME" )); //Diminuir o volume
-		DicionarioDeNotas.put( "O", new String( "DIMINUIRVOLUME" )); //Diminuir o volume
-		DicionarioDeNotas.put( "U", new String( "DIMINUIRVOLUME" )); //Diminuir o volume
+		DicionarioDeNotas.put( "!", new String( "VOLU" )); //Aumentar o volume
+		DicionarioDeNotas.put( "I", new String( "VOLD" )); //Diminuir o volume
+		DicionarioDeNotas.put( "O", new String( "VOLD" )); //Diminuir o volume
+		DicionarioDeNotas.put( "U", new String( "VOLD" )); //Diminuir o volume
 		DicionarioDeNotas.put( "\r\n", new String( "TROCARINSTRUMENTO" )); //Trocar de instrumento musical
 		DicionarioDeNotas.put( "\n", new String( "TROCARINSTRUMENTO" )); //Trocar de instrumento
-		DicionarioDeNotas.put( ";", new String( "AUMENTARBPM" )); //Aumenta quantidade de batidas por minuto
-		DicionarioDeNotas.put( ",", new String( "DIMINUIRBPM" )); //Diminui quantidade de batidas por minuto
+		DicionarioDeNotas.put( ";", new String( "BPMU" )); //Aumenta quantidade de batidas por minuto
+		DicionarioDeNotas.put( ",", new String( "BPMD" )); //Diminui quantidade de batidas por minuto
 		DicionarioDeNotas.put( "?", new String( "OITAVADEFAULT" )); //Coloca oitava default
 		DicionarioDeNotas.put( ".", new String( "OITAVADEFAULT" )); //Coloca oitava default	
 	}

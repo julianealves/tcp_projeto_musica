@@ -1,145 +1,106 @@
 
 public class Musica {
-	private String Musica;
-	private int VolumeDaMusica;
-	private int OitavaMusical;
-	private int BPM;
-	private final int VOLUME_MAXIMO = 16383;
-	private final int OITAVA_DEFAULT = 5;
-	private final int OITAVA_MAXIMA = 10;
-	private final int OITAVA_MINIMA = 0;
-	private final int BPM_MINIMO = 40;
-	private final int BPM_MAXIMO = 220;
-	private final String INSTRUMENTO_MUSICAL = "GUITAR";  //Coloquei um instrumento qualquer, depois decidimos qual sera
-
-	public Musica() {
-		this.Musica = "";
-		this.VolumeDaMusica = 10200;
-		this.OitavaMusical = OITAVA_DEFAULT;
-		this.BPM = 120;
-	}
+	private String textoBruto;
+	private String codificacaoJFugue;
 	
-	public void ComporMusica(String Musica) {
+	private Volume volume;
+	private Ritmo ritmo;
+	private OitavaMusical oitava;
+	
+	public Musica(String textoACodificar,int volumePadrao, int ritmoPadrao, int oitavaPadrao) {
+		volume =  new Volume(volumePadrao);
+		ritmo  =  new Ritmo(ritmoPadrao);
+		oitava =  new OitavaMusical(ritmoPadrao);
 		
-		this.Musica = Musica;
-		this.VerificarVolume("AUMENTARVOLUME");	
-		this.VerificarVolume("DIMINUIRVOLUME");
-		this.VerificarOitava("AUMENTAROITAVA");
-		this.VerificarOitava("DIMINUIROITAVA");
-		this.VerificarOitava("OITAVADEFAULT");
-		this.VerificarBPM("AUMENTARBPM");
-		this.VerificarBPM("DIMINUIRBPM");
-		this.VerificarInstrumento("TROCARINSTRUMENTO");
+		textoBruto = textoACodificar;
 	}
 	
-	private void DobrarVolume() {
-		if (this.VolumeDaMusica*2 <= VOLUME_MAXIMO) {
-			this.VolumeDaMusica = this.VolumeDaMusica * 2;
-		}
-		else {
-			this.VolumeDaMusica = VOLUME_MAXIMO;
-		}
+	public void setTextoBruto(String textoACodificar) {
+		textoBruto = textoACodificar;
 	}
 	
-	private void DiminuirVolumePelaMetade() {
-		this.VolumeDaMusica = this.VolumeDaMusica/2;
+	public String getCodificacaoJFugue() {
+		return codificacaoJFugue;
 	}
 	
-	private void VerificarVolume(String operacao) {
-		int indice;
+	private boolean aindaHaRitmos(String codificacaoJFugue) {
+		return codificacaoJFugue.indexOf("BPM") != -1;
+	}
+	
+	private boolean ehSubidaDeRitmo(int indiceInicialMudanca) {
+		return ehAumentoDeVolume(indiceInicialMudanca);
+	}
+	
+	private void ajustaRitmo() {
 		
-		indice = 0;
+		int indiceInicialMudanca;
+		String ritmoFormatoJFugue;
 		
-		while(indice > -1) {
-			indice = this.Musica.indexOf(operacao);
+		
+		while (aindaHaRitmos(codificacaoJFugue)) {
+			indiceInicialMudanca = codificacaoJFugue.indexOf("BPM");
 			
-			if (indice > -1) {
-				if (operacao == "AUMENTARVOLUME") {
-					this.DobrarVolume();
-				}
-				else {
-					this.DiminuirVolumePelaMetade();
-				}
+			if (ehSubidaDeRitmo(indiceInicialMudanca)) { //BPM Up
+				ritmo.aumentaRitmo();
+				ritmoFormatoJFugue = "T[" + ritmo.getRitmoAtual() + "]";
+				codificacaoJFugue = codificacaoJFugue.replaceFirst("BPMU", ritmoFormatoJFugue);
+			}
+			
+			else {// BPM Down
+				ritmo.diminuiRitmo();
+				ritmoFormatoJFugue = "T[" + ritmo.getRitmoAtual() + "]";
+				codificacaoJFugue = codificacaoJFugue.replaceFirst("BPMD", ritmoFormatoJFugue);
+			}
+		}
+	}
+	
+	private boolean aindaHaVolume() {
+		return codificacaoJFugue.indexOf("VOL") != -1;
+	}
+	
+	private void ajustaVolume() {
+		
+		int indiceInicialMudanca;
+		String volumeFormatoJFugue;
+		
+		while (aindaHaVolume()) {
+			indiceInicialMudanca = codificacaoJFugue.indexOf("VOL");
+			
+			if (ehAumentoDeVolume(indiceInicialMudanca)) { //Volume Up
+				volume.multiplicaVolume(2);
+				volumeFormatoJFugue = "X[Volume]=" + volume.getVolume();
+				codificacaoJFugue = codificacaoJFugue.replaceFirst("VOLU", volumeFormatoJFugue);
 				
-				this.Musica = this.Musica.replaceFirst(operacao, "X[Volume]=" + Integer.toString(this.VolumeDaMusica));
 			}
-		}
-	}
-	
-	private void VerificarOitava(String operacao) {
-		int indice;
 			
-		indice = 0;
-			
-		while(indice > -1) {
-			indice = this.Musica.indexOf(operacao);
-			
-			if (indice > -1) {
-				if (operacao == "AUMENTAROITAVA") {
-					this.OitavaMusical = this.OitavaMusical + 1;
-					if (this.OitavaMusical > OITAVA_MAXIMA) {
-						this.OitavaMusical = OITAVA_MAXIMA;
-					}
-				}
-				else if (operacao == "DIMINUIROITAVA") {
-					this.OitavaMusical = this.OitavaMusical - 1;
-					if (this.OitavaMusical < OITAVA_MINIMA) {
-						this.OitavaMusical = OITAVA_MINIMA;
-					}
-				}
-				else {
-					this.OitavaMusical = OITAVA_DEFAULT;
-				}
-				this.Musica = this.Musica.replaceFirst(operacao, "C" + Integer.toString(this.OitavaMusical));
+			else {//Volume Down
+				volume.divideVolume(2);
+				volumeFormatoJFugue = "X[Volume]=" + volume.getVolume();
+				codificacaoJFugue = codificacaoJFugue.replaceFirst("VOLD", volumeFormatoJFugue);
+				
 			}
 			
 		}
-			
 	}
+
+	private boolean ehAumentoDeVolume(int indiceInicialMudanca) {
+		return codificacaoJFugue.charAt(indiceInicialMudanca + 3) == 'U';
+	}
+
 	
-	private void VerificarBPM(String operacao) {
-		//TODO: alterar a logica, pois o JFugue nao tem um padrao de aumento de BPM
-		int indice;
-			
-		indice = 0;
-			
-		while(indice > -1) {
-			indice = this.Musica.indexOf(operacao);
-			
-			if (indice > -1) {
-				if (operacao == "AUMENTARBPM") {
-					this.BPM = this.BPM + 5;
-					if (this.BPM > BPM_MAXIMO) {
-						this.BPM = BPM_MAXIMO;
-					}
-				}
-				else {
-					this.BPM = this.BPM - 5;
-					if (this.BPM < BPM_MINIMO) {
-						this.BPM = BPM_MINIMO;
-					}
-				}
-				this.Musica = this.Musica.replaceFirst(operacao, "T" + Integer.toString(this.BPM));
-			}
-			
-		}
-			
-	}
+
 	
-	private void VerificarInstrumento(String operacao) {
-		int indice;
-		
-		indice = 0;
-			
-		while(indice > -1) {
-			indice = this.Musica.indexOf(operacao);
-			if (indice > -1) {
-				this.Musica = this.Musica.replaceFirst(operacao, "T[" + INSTRUMENTO_MUSICAL + "]");
-			}
-		}
-	}
 	
-	public String getMusicaString() {
-		return this.Musica;
+	public void recodificacaoJFugue(TradutorDeTextoEmMusica codificador) {
+		codificador.setTextoBruto(textoBruto);
+		codificador.setConfiguracaoPadrao(volume,oitava,ritmo);
+		codificacaoJFugue = codificador.TraduzirTextoEmMusica();
+		ajustaRitmo();
+		ajustaVolume();
+				
 	}
+
+	
+	
+
 }

@@ -6,11 +6,20 @@ public class TradutorDeTextoEmMusica {
 	private final char NOTA_MUSICAL_SOL = 'G';
 	private final char NOTA_MUSICAL_LA = 'A';
 	private final String SILENCIO = "R";
-
+	Volume configVolume;
+	OitavaMusical configOitava;
+	Ritmo  configRitmo;
+	
 	public TradutorDeTextoEmMusica() {
 		this.TextoBruto = "";
 		this.TextoTraduzido = "";	
 		DicionarioDeNotas = new Dicionario();
+	}
+	
+	public void setConfiguracaoPadrao (Volume volumePadrao, OitavaMusical oitavaPadrao, Ritmo ritmoPadrao) {
+		configVolume = volumePadrao;
+		configOitava = oitavaPadrao;
+		configRitmo = ritmoPadrao;
 	}
 	
 	public void setTextoBruto(String TextoBruto) {
@@ -49,11 +58,13 @@ public class TradutorDeTextoEmMusica {
 		return false;
 	}
 	
-	private String AlterarOitavaMusical(char CaractereAtual) {
+	private void AlterarOitavaMusical(char CaractereAtual) {
 		if(this.DigitoPar(Character.getNumericValue(CaractereAtual))) {
-			return "AUMENTAROITAVA";
+			configOitava.incrementaOitava();
 		}
-		return "DIMINUIROITAVA";
+		else {
+			configOitava.decrementaOitava();
+		}
 	}
 	
 	private String DeterminarNotaMusical(String NotaMusicalAnterior, char CaractereAnterior) {
@@ -64,9 +75,9 @@ public class TradutorDeTextoEmMusica {
 	}
 	
 	private String DefinirNotaMusicalAtual(String NotaMusicalAnterior, char CaractereAtual, char CaractereAnterior) {
-		String NotaMusicalAtual;
+		String NotaMusicalAtual = "";
 		if(Character.isDigit(CaractereAtual)) {
-			NotaMusicalAtual = AlterarOitavaMusical(CaractereAtual);
+			AlterarOitavaMusical(CaractereAtual);
 		}
 		else if(CaractereAtual > NOTA_MUSICAL_SOL) {
 			NotaMusicalAtual = DeterminarNotaMusical(NotaMusicalAnterior, CaractereAnterior);
@@ -75,6 +86,15 @@ public class TradutorDeTextoEmMusica {
 			NotaMusicalAtual = NotaMusicalAnterior;
 		}
 		return NotaMusicalAtual;
+	}
+	
+	private boolean isMudancaDePropriedade(String NotaMusical) {
+		return NotaMusical.isEmpty();
+		
+	}
+	
+	private boolean isNotaMusicalPura(String NotaMusical) {
+		return NotaMusical.length() == 1;
 	}
 	
 	public String TraduzirTextoEmMusica() {
@@ -93,10 +113,17 @@ public class TradutorDeTextoEmMusica {
 			if (NotaMusicalAtual.equals("none")) {
 				NotaMusicalAtual = DefinirNotaMusicalAtual(NotaMusicalAnterior, CaractereAtual, CaractereAnterior);
 			}
+			else {
+				if (isNotaMusicalPura(NotaMusicalAtual)) {
+					NotaMusicalAtual += configOitava.getOitavaMusical();
+				}
+			}
 			
-			this.InserirNotaMusical(NotaMusicalAtual);
-			NotaMusicalAnterior = NotaMusicalAtual;
-			CaractereAnterior = CaractereAtual;
+			if (! isMudancaDePropriedade(NotaMusicalAtual)) {
+				this.InserirNotaMusical(NotaMusicalAtual);
+				NotaMusicalAnterior = NotaMusicalAtual;
+				CaractereAnterior = CaractereAtual;
+			}
 		}
 		
 		return this.TextoTraduzido;

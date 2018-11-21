@@ -11,12 +11,15 @@ public class OitavaMusical {
 	}
 	
 	private boolean isOitavaMaxima() {
-		return oitavaAtual == OITAVA_DEFAULT;
+		return oitavaAtual == OITAVA_MAXIMA;
 	}
 
 	public void incrementaOitava() {
 		if (!isOitavaMaxima()) {
 			oitavaAtual++;
+		}
+		else {
+			oitavaAtual = OITAVA_DEFAULT;
 		}
 	}
 	

@@ -34,13 +34,6 @@ public class TradutorDeTextoEmMusica {
 		return this.TextoTraduzido;
 	}
 	
-	private boolean DigitoPar(int digito) {
-		if (digito % 2 == 0) {
-			return true;
-		}
-		return false;
-	}
-	
 	private void InserirNotaMusical(String NotaMusical) {
 		if (this.TextoTraduzido.isEmpty()) {
 			this.TextoTraduzido = NotaMusical;

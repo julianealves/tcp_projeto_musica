@@ -7,17 +7,15 @@ public class Volume {
 		volumeAtual = volumePadrao;
 	}
 	
-	
-	
-	//Volume satura no volume Máximo
-	public void multiplicaVolume(int fator) {
-		if (volumeAtual * fator <= VOLUME_MAXIMO) {
-			volumeAtual *= fator;
+	//Volume satura no volume maximo
+	public void multiplicaVolume(float fator) {
+		if ((int) (volumeAtual * fator) <= VOLUME_MAXIMO) {
+			volumeAtual = (int) (volumeAtual*fator);
 		}
 	
 	}
-	public void divideVolume(int fator) {
-		volumeAtual /= fator;
+	public void divideVolume(float fator) {
+		volumeAtual = (int) (volumeAtual/fator);
 	}
 	
 	public int getVolume() {
@@ -27,7 +25,4 @@ public class Volume {
 	public void setVolume(int novoVolume) {
 		volumeAtual = novoVolume;
 	}
-
-	
-
 }

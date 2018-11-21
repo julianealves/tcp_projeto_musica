@@ -1,6 +1,7 @@
 
 public class OitavaMusical {
 	private final int OITAVA_MAXIMA = 10;
+	private final int OITAVA_DEFAULT = 5;
 	private final int OITAVA_MINIMA = 0;
 	private int oitavaAtual;
 	
@@ -10,7 +11,7 @@ public class OitavaMusical {
 	}
 	
 	private boolean isOitavaMaxima() {
-		return oitavaAtual == OITAVA_MAXIMA;
+		return oitavaAtual == OITAVA_DEFAULT;
 	}
 
 	public void incrementaOitava() {

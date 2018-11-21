@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class InterfaceDoSistema {
 	private static AudioPlayer PlayerDeAudio;
 	private static TradutorDeTextoEmMusica TradutorDeTexto;
+	private static Musica musica;
 	
 	public InterfaceDoSistema() {
 		// TODO Auto-generated constructor stub
@@ -18,14 +19,14 @@ public class InterfaceDoSistema {
 		LerDoTeclado.close();
 		
 		TradutorDeTexto = new TradutorDeTextoEmMusica();
-		TradutorDeTexto.setTextoBruto(TextoDigitado);
-		String TextoTraduzido = TradutorDeTexto.TraduzirTextoEmMusica();
+		musica = new Musica(TextoDigitado, 1000, 0, 5);
+		musica.recodificacaoJFugue(TradutorDeTexto);
 		
-		System.out.println("Texto traduzido: ");
-		System.out.println(TextoTraduzido);
+		String traducao = musica.getCodificacaoJFugue();
 		
-		PlayerDeAudio = new AudioPlayer();
-		PlayerDeAudio.setMusica(TextoTraduzido);
+		System.out.println("Traducao: " + traducao);
+		
+		PlayerDeAudio = new AudioPlayer(musica);
 		PlayerDeAudio.TocarMusica();
 		
 	}

@@ -23,7 +23,7 @@ public class TradutorDeTextoEmMusica {
 	}
 	
 	public void setTextoBruto(String TextoBruto) {
-		this.TextoBruto = TextoBruto.toUpperCase();		
+		this.TextoBruto = TextoBruto;		
 	}
 	
 	public String getTextoBruto() {
@@ -59,12 +59,7 @@ public class TradutorDeTextoEmMusica {
 	}
 	
 	private void AlterarOitavaMusical(char CaractereAtual) {
-		if(this.DigitoPar(Character.getNumericValue(CaractereAtual))) {
-			configOitava.incrementaOitava();
-		}
-		else {
-			configOitava.decrementaOitava();
-		}
+		configOitava.incrementaOitava();
 	}
 	
 	private String DeterminarNotaMusical(String NotaMusicalAnterior, char CaractereAnterior) {
@@ -76,10 +71,10 @@ public class TradutorDeTextoEmMusica {
 	
 	private String DefinirNotaMusicalAtual(String NotaMusicalAnterior, char CaractereAtual, char CaractereAnterior) {
 		String NotaMusicalAtual = "";
-		if(Character.isDigit(CaractereAtual)) {
+		if(CaractereAtual == '?' || CaractereAtual == '.') {
 			AlterarOitavaMusical(CaractereAtual);
 		}
-		else if(CaractereAtual > NOTA_MUSICAL_SOL) {
+		else if(CaractereAtual > NOTA_MUSICAL_SOL || Character.isDigit(CaractereAtual)) {
 			NotaMusicalAtual = DeterminarNotaMusical(NotaMusicalAnterior, CaractereAnterior);
 		}
 		else {

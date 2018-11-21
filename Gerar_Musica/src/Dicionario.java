@@ -18,17 +18,18 @@ public class Dicionario {
 		DicionarioDeNotas.put( "E", new String( "E" )); //Nota Mi
 		DicionarioDeNotas.put( "F", new String( "F" )); //Nota Fa
 		DicionarioDeNotas.put( "G", new String( "G" )); //Nota Sol
-		DicionarioDeNotas.put( " ", new String( "R" )); //Silencio/pausa
-		DicionarioDeNotas.put( "!", new String( "VOLU" )); //Aumentar o volume
-		DicionarioDeNotas.put( "I", new String( "VOLD" )); //Diminuir o volume
-		DicionarioDeNotas.put( "O", new String( "VOLD" )); //Diminuir o volume
-		DicionarioDeNotas.put( "U", new String( "VOLD" )); //Diminuir o volume
-		DicionarioDeNotas.put( "\r\n", new String( "TROCARINSTRUMENTO" )); //Trocar de instrumento musical
-		DicionarioDeNotas.put( "\n", new String( "TROCARINSTRUMENTO" )); //Trocar de instrumento
-		DicionarioDeNotas.put( ";", new String( "BPMU" )); //Aumenta quantidade de batidas por minuto
-		DicionarioDeNotas.put( ",", new String( "BPMD" )); //Diminui quantidade de batidas por minuto
-		DicionarioDeNotas.put( "?", new String( "OITAVADEFAULT" )); //Coloca oitava default
-		DicionarioDeNotas.put( ".", new String( "OITAVADEFAULT" )); //Coloca oitava default	
+		DicionarioDeNotas.put( " ", new String( "VOLU_2.0_" )); //Aumentar o volume
+		DicionarioDeNotas.put( "!", new String( "INSTRUMENTO_6_" )); //Trocar para instrumento 6 (HARPISCHORD)
+		DicionarioDeNotas.put( "I", new String( "VOLU_1.1_" )); //Aumentar o volume em 10%
+		DicionarioDeNotas.put( "O", new String( "VOLU_1.1_" )); //Aumentar o volume em 10%
+		DicionarioDeNotas.put( "U", new String( "VOLU_1.1_" )); //Aumentar o volume em 10%
+		DicionarioDeNotas.put( "i", new String( "VOLU_1.1_" )); //Aumentar o volume em 10%
+		DicionarioDeNotas.put( "o", new String( "VOLU_1.1_" )); //Aumentar o volume em 10%
+		DicionarioDeNotas.put( "u", new String( "VOLU_1.1_" )); //Aumentar o volume em 10%
+		DicionarioDeNotas.put( "\r\n", new String( "INSTRUMENTO_14_" )); //Trocar para instrumento 14 (TUBULAR BELLS)
+		DicionarioDeNotas.put( "\n", new String( "INSTRUMENTO_14_" )); //Trocar para instrumento 14 (TUBULAR BELLS)
+		DicionarioDeNotas.put( ";", new String( "INSTRUMENTO_75_" )); //Trocar para instrumento 75 (PAN FLUTE)
+		DicionarioDeNotas.put( ",", new String( "INSTRUMENTO_19_" )); //Trocar para instrumento 19 (CHURCH ORGAN)	
 	}
 	
 	public String TraduzirCaractere(String caractere) {

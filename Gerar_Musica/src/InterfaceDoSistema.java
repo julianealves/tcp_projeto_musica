@@ -28,6 +28,7 @@ public class InterfaceDoSistema {
 		
 		PlayerDeAudio = new AudioPlayer(musica);
 		PlayerDeAudio.TocarMusica();
+		PlayerDeAudio.SalvarMusica();
 		
 	}
 	

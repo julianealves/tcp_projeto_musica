@@ -32,9 +32,12 @@ public class Dicionario {
 		DicionarioDeNotas.put( ",", new String( "INSTRUMENTO_19_" )); //Trocar para instrumento 19 (CHURCH ORGAN)	
 	}
 	
-	public String TraduzirCaractere(String caractere) {
+	public String TraduzirCaractere(String caractere) {		
 		if (DicionarioDeNotas.containsKey(caractere)) {
 			return DicionarioDeNotas.get(caractere);
+		}
+		else if(Character.isDigit(caractere.charAt(0))) {
+				return "INSTRUMENTOF_" + caractere + "_";  //F de Fator de soma
 		}
 		return "none";
 	}

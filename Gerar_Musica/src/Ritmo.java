@@ -1,6 +1,4 @@
-import java.awt.List;
 import java.util.ArrayList;
-import java.io.*;
 
 public class Ritmo {
 	private ArrayList<String> escalaDeRitmo;

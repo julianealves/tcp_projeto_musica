@@ -6,11 +6,13 @@ public class Musica {
 	private Volume volume;
 	private Ritmo ritmo;
 	private OitavaMusical oitava;
+	private InstrumentoMusical InstrumentoMusical;
 	
 	public Musica(String textoACodificar,int volumePadrao, int ritmoPadrao, int oitavaPadrao) {
 		volume =  new Volume(volumePadrao);
 		ritmo  =  new Ritmo(ritmoPadrao);
 		oitava =  new OitavaMusical(oitavaPadrao);
+		InstrumentoMusical = new InstrumentoMusical();
 		
 		textoBruto = textoACodificar;
 	}
@@ -23,7 +25,7 @@ public class Musica {
 		return codificacaoJFugue;
 	}
 	
-	private boolean aindaHaRitmos(String codificacaoJFugue) {
+	private boolean aindaHaRitmos() {
 		return codificacaoJFugue.indexOf("BPM") != -1;
 	}
 	
@@ -33,6 +35,10 @@ public class Musica {
 	
 	private boolean ehAumentoDeVolume(int indiceInicialMudanca) {
 		return codificacaoJFugue.charAt(indiceInicialMudanca + 3) == 'U';
+	}
+	
+	private boolean ehFatorDeSoma(int indiceInicialMudanca) {
+		return codificacaoJFugue.charAt(indiceInicialMudanca + 11) == 'F';
 	}
 	
 	private float pegarFatorDeMultiplicidade(int indiceInicialMudanca) {
@@ -53,15 +59,39 @@ public class Musica {
 				finalizarProcura = true;
 			}
 		}
-		codificacaoJFugue = codificacaoJFugue.replaceFirst("_", "");
-		codificacaoJFugue = codificacaoJFugue.replaceFirst("_", "");
 		
 		fatorDeMultiplicidade = Float.parseFloat(fator);
 		return fatorDeMultiplicidade;
 	}
 	
+	private int pegarInstrumentoMusical(int indiceInicialMudanca, int indiceDoNumeroInstrumento) {
+		String instrumentoMusical = "";
+		int indice;
+		boolean finalizarProcura = false;
+		
+		indice = indiceInicialMudanca + indiceDoNumeroInstrumento;
+		
+		while(!finalizarProcura) {
+			if(codificacaoJFugue.charAt(indice) != '_') {
+				instrumentoMusical = instrumentoMusical + codificacaoJFugue.charAt(indice);				
+				indice = indice + 1;
+			}
+			else {
+				codificacaoJFugue = codificacaoJFugue.replaceFirst(instrumentoMusical, "");
+				finalizarProcura = true;
+			}			
+		}
+		
+		return Integer.parseInt(instrumentoMusical);
+		
+	}
+	
 	private boolean aindaHaVolume() {
 		return codificacaoJFugue.indexOf("VOL") != -1;
+	}
+	
+	private boolean aindaHaInstrumentoMusical() {
+		return codificacaoJFugue.indexOf("INSTRUMENTO") != -1;
 	}
 	
 	private void ajustaRitmo() {
@@ -70,7 +100,7 @@ public class Musica {
 		String ritmoFormatoJFugue;
 		
 		
-		while (aindaHaRitmos(codificacaoJFugue)) {
+		while (aindaHaRitmos()) {
 			indiceInicialMudanca = codificacaoJFugue.indexOf("BPM");
 			
 			if (ehSubidaDeRitmo(indiceInicialMudanca)) { //BPM Up
@@ -100,7 +130,7 @@ public class Musica {
 				fatorDeMultiplicidade = pegarFatorDeMultiplicidade(indiceInicialMudanca);
 				volume.multiplicaVolume(fatorDeMultiplicidade);
 				volumeFormatoJFugue = "X[Volume]=" + volume.getVolume();
-				codificacaoJFugue = codificacaoJFugue.replaceFirst("VOLU", volumeFormatoJFugue);
+				codificacaoJFugue = codificacaoJFugue.replaceFirst("VOLU__", volumeFormatoJFugue);
 				
 			}
 			
@@ -113,12 +143,44 @@ public class Musica {
 		}
 	}
 	
+	private void ajustaInstrumentoMusical() {
+		int indiceInicialMudanca;
+		int numeroDoInstrumento;
+		String instrumentoFormatoJFugue;
+		boolean possuiFatorDeSoma = false;
+		
+		while (aindaHaInstrumentoMusical()) {
+			indiceInicialMudanca = codificacaoJFugue.indexOf("INSTRUMENTO");
+			if (ehFatorDeSoma(indiceInicialMudanca)) {
+				numeroDoInstrumento = pegarInstrumentoMusical(indiceInicialMudanca, 13);
+				InstrumentoMusical.AtualizarIntrumentoMusical(numeroDoInstrumento);
+				possuiFatorDeSoma = true;
+			}
+			else {
+				numeroDoInstrumento = pegarInstrumentoMusical(indiceInicialMudanca, 12);
+				InstrumentoMusical.setIntrumentoMusicalAtual(numeroDoInstrumento);
+			}
+			
+			instrumentoFormatoJFugue = "I" + InstrumentoMusical.getIntrumentoMusicalAtual();
+			if (possuiFatorDeSoma) {
+				codificacaoJFugue = codificacaoJFugue.replaceFirst("INSTRUMENTOF__", instrumentoFormatoJFugue);
+			}
+			else {
+				codificacaoJFugue = codificacaoJFugue.replaceFirst("INSTRUMENTO__", instrumentoFormatoJFugue);
+			}
+			
+			possuiFatorDeSoma = false;
+		}
+		
+	}
+	
 	public void recodificacaoJFugue(TradutorDeTextoEmMusica codificador) {
 		codificador.setTextoBruto(textoBruto);
 		codificador.setConfiguracaoPadrao(volume, oitava, ritmo);
 		codificacaoJFugue = codificador.TraduzirTextoEmMusica();
 		ajustaRitmo();
 		ajustaVolume();
+		ajustaInstrumentoMusical();
 				
 	}
 

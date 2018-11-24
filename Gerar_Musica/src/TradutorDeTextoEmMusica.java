@@ -67,7 +67,7 @@ public class TradutorDeTextoEmMusica {
 		if(CaractereAtual == '?' || CaractereAtual == '.') {
 			AlterarOitavaMusical(CaractereAtual);
 		}
-		else if(CaractereAtual > NOTA_MUSICAL_SOL || Character.isDigit(CaractereAtual)) {
+		else if(CaractereAtual > NOTA_MUSICAL_SOL) {
 			NotaMusicalAtual = DeterminarNotaMusical(NotaMusicalAnterior, CaractereAnterior);
 		}
 		else {

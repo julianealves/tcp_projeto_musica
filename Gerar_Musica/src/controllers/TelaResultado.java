@@ -90,10 +90,7 @@ public class TelaResultado implements Initializable {
 			controleMusica = new ControlePlayerThread(dadosModel.getAudioPlayer(),"PLAY");
 		}
 		
-		new Thread(controleMusica).start();
-		
-		
-		
+		new Thread(controleMusica).start();	
 
 	}
 	

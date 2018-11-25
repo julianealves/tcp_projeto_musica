@@ -16,7 +16,7 @@ public class AudioPlayer {
 	public AudioPlayer(Musica Musica) {
 		this.Musica = Musica;
 		player = new Player();
-		String musica = Musica.getCodificacaoJFugue();
+		String musica = this.Musica.getCodificacaoJFugue();
 		musicaPadronizada = new Pattern(musica); 
 	}
 	

@@ -37,8 +37,14 @@ public class Dicionario {
 		if (DicionarioDeNotas.containsKey(caractere)) {
 			return DicionarioDeNotas.get(caractere);
 		}
-		else if(Character.isDigit(caractere.charAt(0))) {
-				return "INSTRUMENTOF_" + caractere + "_";  //F de Fator de soma
+		else if(Character.isDigit(caractere.charAt(0))) {	
+			int indice = 0;
+			String fator = "";
+			while (indice < caractere.length() && Character.isDigit(caractere.charAt(indice))) {
+				fator = fator + caractere.charAt(indice);
+				indice = indice + 1;
+			}
+			return "INSTRUMENTOF_" + fator + "_";  //F de Fator de soma
 		}
 		return "none";
 	}

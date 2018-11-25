@@ -4,6 +4,8 @@ import java.util.ArrayList;
 public class Ritmo {
 	private ArrayList<String> escalaDeRitmo;
 	private int ritmoAtual;
+	private final int RITMO_MAXIMO = 12;
+	private final int RITMO_MINIMO = 0;
 	
 	private void preencheEscala() {
 		escalaDeRitmo = new ArrayList<String>();
@@ -25,9 +27,16 @@ public class Ritmo {
 	
 	public Ritmo(int ritmoDefault) {
 		preencheEscala();
-		ritmoAtual = ritmoDefault;
 		
-		
+		if (ritmoDefault > RITMO_MAXIMO) {
+			ritmoAtual = RITMO_MAXIMO;
+		}
+		else if(ritmoDefault < RITMO_MINIMO) {
+			ritmoAtual = RITMO_MINIMO;
+		}
+		else {
+			ritmoAtual = ritmoDefault;
+		}		
 	}
 	
 	public String getRitmoAtual() {
@@ -35,7 +44,7 @@ public class Ritmo {
 	}
 	
 	private boolean isRitmoMaximo() {
-		return ritmoAtual == (escalaDeRitmo.size() - 1);
+		return ritmoAtual == RITMO_MAXIMO;
 	}
 	
 	//Satura o ritmo no ritmoMaximo
@@ -44,10 +53,9 @@ public class Ritmo {
 			ritmoAtual++;
 		}	
 	}
-	
 
 	private boolean isRitmoMinimo() {
-		return ritmoAtual == 0;
+		return ritmoAtual == RITMO_MINIMO;
 	}
 	
 	//Satura o ritmo no ritimoMinimo

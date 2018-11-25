@@ -16,16 +16,19 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import main.Musica;
 
 public class TelaResultado implements Initializable {
 	
 	private DadosModel dadosModel;
+	private Musica musica;
 	
-	@FXML StackPane stackPane;
-	@FXML Tab tabTextoOriginal;
+	@FXML private StackPane stackPane;
+	@FXML private Tab tabTextoOriginal;
+	@FXML private Tab tabTextoTraduzido;
 	
-	Text textoOriginal;
-	Text textoTraduzido;
+	private Text textoOriginal;
+	private Text textoTraduzido;
 	
 	public TelaResultado() {}
 	
@@ -34,14 +37,20 @@ public class TelaResultado implements Initializable {
 		textoOriginal = new Text();
 		criarConteudoTab(textoOriginal, tabTextoOriginal);
 		
+		musica = new Musica(textoOriginal.toString());
+		
+		textoTraduzido = new Text();
+		criarConteudoTab(textoTraduzido, tabTextoTraduzido);
 		
 		System.out.println("--> TelaResultado inicializada!");
 	}
 	
 	public void setDadosModel(DadosModel dadosModel) {
 		this.textoOriginal.textProperty().unbind();
+		this.textoTraduzido.textProperty().unbind();
 		this.dadosModel = dadosModel;
 		this.textoOriginal.textProperty().bind(dadosModel.getTextoOriginalProperty());
+		this.textoTraduzido.textProperty().bind(dadosModel.getTextoOriginalProperty());
 	}
 	
 	private void criarConteudoTab(Text texto, Tab tab) {

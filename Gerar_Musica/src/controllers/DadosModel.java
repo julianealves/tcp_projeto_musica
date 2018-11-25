@@ -5,17 +5,21 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.AudioPlayer;
+import main.Musica;
+import main.TradutorDeTextoEmMusica;
 
 public class DadosModel {
-	
-	public enum TelasID {
-		TELA_ENTRADA, TELA_RESULTADO;
-	}
 	
 	private Stage janela;
 	public HashMap<TelasID, Scene> telas = new HashMap<TelasID, Scene>();
 	
 	private final StringProperty textoOriginal = new SimpleStringProperty("");
+	private final StringProperty textoTraduzido = new SimpleStringProperty("");
+	
+	public enum TelasID {
+		TELA_ENTRADA, TELA_RESULTADO;
+	}
 	
 	DadosModel() {}
 	
@@ -39,8 +43,12 @@ public class DadosModel {
 		textoOriginal.set(texto);
 	}
 	
-	public final String getTextoOriginal() {
-		return textoOriginal.get();
+	public final StringProperty getTextoTraduzidoProperty() {
+		return this.textoTraduzido;
+	}
+
+	public final void setTextoTraduzido(String texto) {
+		textoTraduzido.set(texto);
 	}
 
 }

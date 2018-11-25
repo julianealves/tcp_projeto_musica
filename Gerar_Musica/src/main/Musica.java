@@ -9,10 +9,10 @@ public class Musica {
 	private OitavaMusical oitava;
 	private InstrumentoMusical InstrumentoMusical;
 	
-	public Musica(String textoACodificar,int volumePadrao, int ritmoPadrao, int oitavaPadrao) {
-		volume =  new Volume(volumePadrao);
-		ritmo  =  new Ritmo(ritmoPadrao);
-		oitava =  new OitavaMusical(oitavaPadrao);
+	public Musica(String textoACodificar) {
+		volume =  new Volume(1000);
+		ritmo  =  new Ritmo(0);
+		oitava =  new OitavaMusical(5);
 		InstrumentoMusical = new InstrumentoMusical();
 		
 		textoBruto = textoACodificar;

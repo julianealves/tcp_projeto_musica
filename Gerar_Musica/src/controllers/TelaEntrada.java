@@ -68,7 +68,7 @@ public class TelaEntrada implements Initializable {
 	}
 	
 	private void gerarMusica() {
-		String texto = new String("ERRO: N�o conseguiu buscar o texto!");
+		String texto = new String("ERRO: Nao conseguiu buscar o texto!");
 		if (caixaTextoVazia(caixaTexto.getText())) {
 			byte[] textoCodificado;
 			try {
@@ -99,14 +99,14 @@ public class TelaEntrada implements Initializable {
 		conteudoDialog.setActions(botaoFechar);
 		if (!caixaTextoVazia(caixaTexto.getText()) && !arquivoVazio(arquivo)) {
 			titulo = "Oops! Entradas duplicadas.";
-			conteudo = "Voc� inseriu um texto atrav�s da caixa de texto e de um arquivo."
+			conteudo = "Voce inseriu um texto atraves da caixa de texto e de um arquivo."
 					+ "\nInsira apenas uma forma de entrada, por favor!";
 		} else if (caixaTextoVazia(caixaTexto.getText()) && arquivoVazio(arquivo)){
 			titulo = "Oops! Faltou o texto.";
-			conteudo = "Para gerar a m�sica � necess�rio digitar um texto ou, se preferir, carregar um arquivo de texto!";
+			conteudo = "Para gerar a musica eh necessario digitar um texto ou, se preferir, carregar um arquivo de texto!";
 		} else {
 			titulo = "Tudo pronto?";
-			conteudo = "Tem certeza de que est� tudo pronto para gerar m�sica?";
+			conteudo = "Tem certeza de que esta tudo pronto para gerar musica?";
 			conteudoDialog.setActions(botaoConfirmar,botaoFechar);
 		}
 		

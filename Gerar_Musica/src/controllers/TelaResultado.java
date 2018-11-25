@@ -91,7 +91,6 @@ public class TelaResultado implements Initializable {
 		}
 		
 		new Thread(controleMusica).start();	
-
 	}
 	
 	public void voltarTelaEntrada(ActionEvent event) {

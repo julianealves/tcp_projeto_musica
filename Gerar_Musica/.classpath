@@ -4,8 +4,9 @@
 	<classpathentry kind="src" path="Testes"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/mathe/Documents/Java libraries/jfugue-5.0.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/mathe/Documents/Java libraries/jfoenix-8.0.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/mathe/Documents/Java libraries/fontawesomefx-8.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Juliane Alves/Documents/GitHub/tcp_projeto_musica/Gerar_Musica/fontawesomefx-8.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Juliane Alves/Documents/GitHub/tcp_projeto_musica/Gerar_Musica/jfoenix-8.0.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Juliane Alves/Documents/GitHub/tcp_projeto_musica/Gerar_Musica/jfugue-5.0.9.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

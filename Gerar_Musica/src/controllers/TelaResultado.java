@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXScrollPane;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,16 +17,18 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import main.AudioPlayer;
 import main.Musica;
+import main.TradutorDeTextoEmMusica;
 
 public class TelaResultado implements Initializable {
 	
 	private DadosModel dadosModel;
-	private Musica musica;
 	
 	@FXML private StackPane stackPane;
 	@FXML private Tab tabTextoOriginal;
 	@FXML private Tab tabTextoTraduzido;
+	@FXML private FontAwesomeIconView iconePausarPlay;
 	
 	private Text textoOriginal;
 	private Text textoTraduzido;
@@ -36,8 +39,6 @@ public class TelaResultado implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		textoOriginal = new Text();
 		criarConteudoTab(textoOriginal, tabTextoOriginal);
-		
-		musica = new Musica(textoOriginal.toString());
 		
 		textoTraduzido = new Text();
 		criarConteudoTab(textoTraduzido, tabTextoTraduzido);
@@ -50,7 +51,7 @@ public class TelaResultado implements Initializable {
 		this.textoTraduzido.textProperty().unbind();
 		this.dadosModel = dadosModel;
 		this.textoOriginal.textProperty().bind(dadosModel.getTextoOriginalProperty());
-		this.textoTraduzido.textProperty().bind(dadosModel.getTextoOriginalProperty());
+		this.textoTraduzido.textProperty().bind(dadosModel.getTextoTraduzidoProperty());
 	}
 	
 	private void criarConteudoTab(Text texto, Tab tab) {
@@ -79,7 +80,14 @@ public class TelaResultado implements Initializable {
 	}
 	
 	public void tocarMusica(ActionEvent event) {
+		if (iconePausarPlay.getGlyphName() == "PAUSE") {
+			iconePausarPlay.setGlyphName("PLAY");
+		} else {
+			iconePausarPlay.setGlyphName("PAUSE");
+		}
 		
+		AudioPlayer player = new AudioPlayer(dadosModel.getMusica());
+		player.TocarMusica();
 	}
 	
 	public void voltarTelaEntrada(ActionEvent event) {

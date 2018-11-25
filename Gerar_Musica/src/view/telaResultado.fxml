@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="680.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.TelaResultado">
+<AnchorPane prefHeight="680.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaResultado">
    <children>
       <Pane layoutX="-14.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #6200EA;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -66,7 +66,7 @@
                         <Font size="18.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIconView fill="WHITE" glyphName="PAUSE" size="25" textAlignment="CENTER" />
+                        <FontAwesomeIconView fx:id="iconePausarPlay" fill="WHITE" glyphName="PLAY" size="25" textAlignment="CENTER" />
                      </graphic>
                   </JFXButton>
                   <JFXButton fx:id="botaoFimMusica" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#fimMusica" prefHeight="50.0" prefWidth="115.0" style="-fx-background-color: #864ad9; -fx-background-radius: 0 10 10 0;" text=" ">

@@ -17,6 +17,8 @@ public class DadosModel {
 	private final StringProperty textoOriginal = new SimpleStringProperty("");
 	private final StringProperty textoTraduzido = new SimpleStringProperty("");
 	
+	private Musica musica;
+	
 	public enum TelasID {
 		TELA_ENTRADA, TELA_RESULTADO;
 	}
@@ -47,8 +49,21 @@ public class DadosModel {
 		return this.textoTraduzido;
 	}
 
-	public final void setTextoTraduzido(String texto) {
+	private final void setTextoTraduzido(String texto) {
 		textoTraduzido.set(texto);
+	}
+	
+	public final Musica getMusica() {
+		return this.musica;
+	}
+	
+	public final void setMusica(String textoOriginal) {
+		this.musica = new Musica(textoOriginal);
+		TradutorDeTextoEmMusica tradutor = new TradutorDeTextoEmMusica();
+		musica.recodificacaoJFugue(tradutor);
+		
+		setTextoTraduzido(musica.getCodificacaoJFugue());
+		System.out.println(getTextoTraduzidoProperty().toString());
 	}
 
 }

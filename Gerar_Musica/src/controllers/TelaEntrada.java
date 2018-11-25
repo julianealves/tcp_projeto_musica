@@ -81,6 +81,7 @@ public class TelaEntrada implements Initializable {
 		}
 		
 		dadosModel.setTextoOriginal(texto);
+		dadosModel.setMusica(texto);
 		
 		dadosModel.getJanela().setScene(dadosModel.telas.get(DadosModel.TelasID.TELA_RESULTADO));
 		dadosModel.getJanela().show();

@@ -15,6 +15,8 @@ public class ControladorInterface extends Application {
 	
 	private final DadosModel dadosModel = new DadosModel();
 	
+	public ControladorInterface() {}
+	
 	@Override
 	public void start(Stage primaryStage) {
 		this.janela = primaryStage;

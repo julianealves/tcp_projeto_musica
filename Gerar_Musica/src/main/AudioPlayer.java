@@ -1,3 +1,4 @@
+package main;
 //import org.jfugue.*;
 import java.io.File;
 import java.io.IOException;

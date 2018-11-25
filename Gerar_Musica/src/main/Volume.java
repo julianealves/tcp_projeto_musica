@@ -1,3 +1,4 @@
+package main;
 public class Volume {
 	private final int VOLUME_MAXIMO = 16383;
 	private int volumeAtual;

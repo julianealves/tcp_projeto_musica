@@ -1,3 +1,4 @@
+package main;
 
 public class OitavaMusical {
 	private final int OITAVA_MAXIMA = 10;

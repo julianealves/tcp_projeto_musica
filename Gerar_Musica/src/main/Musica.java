@@ -1,3 +1,4 @@
+package main;
 
 public class Musica {
 	private String textoBruto;

@@ -1,3 +1,4 @@
+package main;
 
 public class TradutorDeTextoEmMusica {
 	private String TextoBruto;

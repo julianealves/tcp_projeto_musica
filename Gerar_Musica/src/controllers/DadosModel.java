@@ -1,5 +1,6 @@
 package controllers;
 
+
 import java.util.HashMap;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -13,6 +14,9 @@ public class DadosModel {
 	
 	private Stage janela;
 	public HashMap<TelasID, Scene> telas = new HashMap<TelasID, Scene>();
+	
+	private AudioPlayer player;
+	
 	
 	private final StringProperty textoOriginal = new SimpleStringProperty("");
 	private final StringProperty textoTraduzido = new SimpleStringProperty("");
@@ -64,6 +68,14 @@ public class DadosModel {
 		
 		setTextoTraduzido(musica.getCodificacaoJFugue());
 		System.out.println(getTextoTraduzidoProperty().toString());
+	}
+	
+	public final void setAudioPlayer(AudioPlayer novoPlayer) {
+		player = novoPlayer;
+	}
+	
+	public final AudioPlayer getAudioPlayer() {
+		return player;
 	}
 
 }

@@ -1,4 +1,5 @@
 package controllers;
+import main.AudioPlayer;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,7 +68,7 @@ public class TelaEntrada implements Initializable {
 	}
 	
 	private void gerarMusica() {
-		String texto = new String("ERRO: Não conseguiu buscar o texto!");
+		String texto = new String("ERRO: Nï¿½o conseguiu buscar o texto!");
 		if (caixaTextoVazia(caixaTexto.getText())) {
 			byte[] textoCodificado;
 			try {
@@ -82,6 +83,8 @@ public class TelaEntrada implements Initializable {
 		
 		dadosModel.setTextoOriginal(texto);
 		dadosModel.setMusica(texto);
+		dadosModel.setAudioPlayer(new AudioPlayer(dadosModel.getMusica()));
+		
 		
 		dadosModel.getJanela().setScene(dadosModel.telas.get(DadosModel.TelasID.TELA_RESULTADO));
 		dadosModel.getJanela().show();
@@ -96,14 +99,14 @@ public class TelaEntrada implements Initializable {
 		conteudoDialog.setActions(botaoFechar);
 		if (!caixaTextoVazia(caixaTexto.getText()) && !arquivoVazio(arquivo)) {
 			titulo = "Oops! Entradas duplicadas.";
-			conteudo = "Você inseriu um texto através da caixa de texto e de um arquivo."
+			conteudo = "Vocï¿½ inseriu um texto atravï¿½s da caixa de texto e de um arquivo."
 					+ "\nInsira apenas uma forma de entrada, por favor!";
 		} else if (caixaTextoVazia(caixaTexto.getText()) && arquivoVazio(arquivo)){
 			titulo = "Oops! Faltou o texto.";
-			conteudo = "Para gerar a música é necessário digitar um texto ou, se preferir, carregar um arquivo de texto!";
+			conteudo = "Para gerar a mï¿½sica ï¿½ necessï¿½rio digitar um texto ou, se preferir, carregar um arquivo de texto!";
 		} else {
 			titulo = "Tudo pronto?";
-			conteudo = "Tem certeza de que está tudo pronto para gerar música?";
+			conteudo = "Tem certeza de que estï¿½ tudo pronto para gerar mï¿½sica?";
 			conteudoDialog.setActions(botaoConfirmar,botaoFechar);
 		}
 		

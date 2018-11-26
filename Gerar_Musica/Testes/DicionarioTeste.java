@@ -32,11 +32,12 @@ public class DicionarioTeste {
 		assertEquals("INSTRUMENTOF_9_", Dicionario.TraduzirCaractere("9"));
 		assertEquals("INSTRUMENTOF_1_", Dicionario.TraduzirCaractere("1"));
 		assertEquals("INSTRUMENTOF_19_", Dicionario.TraduzirCaractere("19"));
+		assertEquals("INSTRUMENTOF_257_", Dicionario.TraduzirCaractere("257"));
 		
 		assertEquals("none", Dicionario.TraduzirCaractere("ss"));
 		assertEquals("none", Dicionario.TraduzirCaractere("s1"));
-		assertEquals("INSTRUMENTOF_1_", Dicionario.TraduzirCaractere("1s"));
-		assertEquals("INSTRUMENTOF_12_", Dicionario.TraduzirCaractere("12s"));
+		assertEquals("none", Dicionario.TraduzirCaractere("1s"));
+		assertEquals("none", Dicionario.TraduzirCaractere("12s"));
 		
 		assertEquals("none", Dicionario.TraduzirCaractere("a"));
 	}

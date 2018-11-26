@@ -33,18 +33,23 @@ public class Dicionario {
 		DicionarioDeNotas.put( ",", new String( "INSTRUMENTO_19_" )); //Trocar para instrumento 19 (CHURCH ORGAN)	
 	}
 	
+	private boolean possuiSomenteDigitos(String caractere) {
+		int indice = 0;
+		while (indice < caractere.length()) {
+			if (!Character.isDigit(caractere.charAt(indice))){
+				return false;
+			}
+			indice = indice + 1;
+		}
+		return true;
+	}
+	
 	public String TraduzirCaractere(String caractere) {		
 		if (DicionarioDeNotas.containsKey(caractere)) {
 			return DicionarioDeNotas.get(caractere);
 		}
-		else if(Character.isDigit(caractere.charAt(0))) {	
-			int indice = 0;
-			String fator = "";
-			while (indice < caractere.length() && Character.isDigit(caractere.charAt(indice))) {
-				fator = fator + caractere.charAt(indice);
-				indice = indice + 1;
-			}
-			return "INSTRUMENTOF_" + fator + "_";  //F de Fator de soma
+		else if(possuiSomenteDigitos(caractere)) {
+			return "INSTRUMENTOF_" + caractere + "_";  //F de Fator de soma
 		}
 		return "none";
 	}

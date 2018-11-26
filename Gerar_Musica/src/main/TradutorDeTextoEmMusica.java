@@ -7,24 +7,22 @@ public class TradutorDeTextoEmMusica {
 	private final char NOTA_MUSICAL_SOL = 'G';
 	private final char NOTA_MUSICAL_LA = 'A';
 	private final String SILENCIO = "R";
-	Volume configVolume;
 	OitavaMusical configOitava;
-	Ritmo  configRitmo;
 	
 	public TradutorDeTextoEmMusica() {
 		this.TextoBruto = "";
-		this.TextoTraduzido = "";	
+		limparTextoTraduzido();	
+		
 		DicionarioDeNotas = new Dicionario();
 	}
 	
-	public void setConfiguracaoPadrao (Volume volumePadrao, OitavaMusical oitavaPadrao, Ritmo ritmoPadrao) {
-		configVolume = volumePadrao;
-		configOitava = oitavaPadrao;
-		configRitmo = ritmoPadrao;
+	private void limparTextoTraduzido() {
+		this.TextoTraduzido = "";
 	}
 	
 	public void setTextoBruto(String TextoBruto) {
-		this.TextoBruto = TextoBruto;		
+		this.TextoBruto = TextoBruto;	
+		limparTextoTraduzido();
 	}
 	
 	public String getTextoBruto() {
@@ -68,7 +66,7 @@ public class TradutorDeTextoEmMusica {
 		if(CaractereAtual == '?' || CaractereAtual == '.') {
 			AlterarOitavaMusical(CaractereAtual);
 		}
-		else if(CaractereAtual > NOTA_MUSICAL_SOL) {
+		else if(CaractereAtual > NOTA_MUSICAL_SOL || CaractereAtual < NOTA_MUSICAL_LA) {
 			NotaMusicalAtual = DeterminarNotaMusical(NotaMusicalAnterior, CaractereAnterior);
 		}
 		else {
@@ -86,10 +84,12 @@ public class TradutorDeTextoEmMusica {
 		return NotaMusical.length() == 1;
 	}
 	
-	public String TraduzirTextoEmMusica() {
+	public String TraduzirTextoEmMusica(OitavaMusical oitavaPadrao) {
 		int TamanhoDoTexto;
 		String NotaMusicalAtual, NotaMusicalAnterior;
 		char CaractereAtual, CaractereAnterior;
+		
+		configOitava = oitavaPadrao;
 		
 		NotaMusicalAnterior = "";
 		CaractereAnterior = 0;

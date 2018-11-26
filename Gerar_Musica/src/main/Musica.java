@@ -177,8 +177,7 @@ public class Musica {
 	
 	public void recodificacaoJFugue(TradutorDeTextoEmMusica codificador) {
 		codificador.setTextoBruto(textoBruto);
-		codificador.setConfiguracaoPadrao(volume, oitava, ritmo);
-		codificacaoJFugue = codificador.TraduzirTextoEmMusica();
+		codificacaoJFugue = codificador.TraduzirTextoEmMusica(oitava);
 		ajustaRitmo();
 		ajustaVolume();
 		ajustaInstrumentoMusical();

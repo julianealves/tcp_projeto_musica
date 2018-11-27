@@ -56,7 +56,6 @@ public class Musica {
 				indice = indice + 1;
 			}
 			else {
-				codificacaoJFugue = codificacaoJFugue.replaceFirst(fator, "");
 				finalizarProcura = true;
 			}
 		}
@@ -78,7 +77,6 @@ public class Musica {
 				indice = indice + 1;
 			}
 			else {
-				codificacaoJFugue = codificacaoJFugue.replaceFirst(instrumentoMusical, "");
 				finalizarProcura = true;
 			}			
 		}
@@ -131,7 +129,7 @@ public class Musica {
 				fatorDeMultiplicidade = pegarFatorDeMultiplicidade(indiceInicialMudanca);
 				volume.multiplicaVolume(fatorDeMultiplicidade);
 				volumeFormatoJFugue = "X[Volume]=" + volume.getVolume();
-				codificacaoJFugue = codificacaoJFugue.replaceFirst("VOLU__", volumeFormatoJFugue);
+				codificacaoJFugue = codificacaoJFugue.replaceFirst("VOLU_" + Float.toString(fatorDeMultiplicidade) + "_", volumeFormatoJFugue);
 				
 			}
 			
@@ -164,10 +162,10 @@ public class Musica {
 			
 			instrumentoFormatoJFugue = "I" + InstrumentoMusical.getIntrumentoMusicalAtual();
 			if (possuiFatorDeSoma) {
-				codificacaoJFugue = codificacaoJFugue.replaceFirst("INSTRUMENTOF__", instrumentoFormatoJFugue);
+				codificacaoJFugue = codificacaoJFugue.replaceFirst("INSTRUMENTOF_" + InstrumentoMusical.getIntrumentoMusicalAtual() + "_", instrumentoFormatoJFugue);
 			}
 			else {
-				codificacaoJFugue = codificacaoJFugue.replaceFirst("INSTRUMENTO__", instrumentoFormatoJFugue);
+				codificacaoJFugue = codificacaoJFugue.replaceFirst("INSTRUMENTO_" + InstrumentoMusical.getIntrumentoMusicalAtual() +  "_", instrumentoFormatoJFugue);
 			}
 			
 			possuiFatorDeSoma = false;

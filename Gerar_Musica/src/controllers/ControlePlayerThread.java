@@ -15,9 +15,9 @@ public class ControlePlayerThread implements Runnable{
 	@Override
 	public void run() {
 		switch(actionToPerform) {
-			case "PLAY"	: player.TocarMusica();
+			case "PLAY"	: player.tocarMusica();
 						  break;
-			case "PAUSE": player.PausaMusica();
+			case "PAUSE": player.pausaMusica();
 						  break;
 		    default:	break;
 						 

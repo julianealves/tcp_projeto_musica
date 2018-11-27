@@ -20,7 +20,7 @@ public class AudioPlayer {
 		musicaPadronizada = new Pattern(musica); 
 	}
 	
-	public void TocarMusica() {
+	public void tocarMusica() {
 		ManagedPlayer controle = player.getManagedPlayer();
 		
 		if (controle.isPaused()) {
@@ -37,7 +37,7 @@ public class AudioPlayer {
 		
 	}
 	
-	public void PausaMusica() {
+	public void pausaMusica() {
 		ManagedPlayer controle = player.getManagedPlayer();
 		if (controle.isPlaying()) {
 			controle.pause();
@@ -45,7 +45,7 @@ public class AudioPlayer {
 		
 	}
 	
-	public void SalvarMusica() {
+	public void salvarMusica() {
 		try {
 			MidiFileManager.savePatternToMidi(musicaPadronizada, new File("MinhaMusica.midi"));
 			System.out.println("--->Arquivo salvo");

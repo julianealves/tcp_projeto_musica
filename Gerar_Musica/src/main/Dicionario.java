@@ -44,7 +44,7 @@ public class Dicionario {
 		return true;
 	}
 	
-	public String TraduzirCaractere(String caractere) {		
+	public String traduzirCaractere(String caractere) {		
 		if (DicionarioDeNotas.containsKey(caractere)) {
 			return DicionarioDeNotas.get(caractere);
 		}

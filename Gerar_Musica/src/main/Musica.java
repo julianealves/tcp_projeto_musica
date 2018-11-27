@@ -154,7 +154,7 @@ public class Musica {
 			indiceInicialMudanca = codificacaoJFugue.indexOf("INSTRUMENTO");
 			if (ehFatorDeSoma(indiceInicialMudanca)) {
 				numeroDoInstrumento = pegarInstrumentoMusical(indiceInicialMudanca, 13);
-				InstrumentoMusical.AtualizarIntrumentoMusical(numeroDoInstrumento);
+				InstrumentoMusical.atualizarIntrumentoMusical(numeroDoInstrumento);
 				possuiFatorDeSoma = true;
 			}
 			else {

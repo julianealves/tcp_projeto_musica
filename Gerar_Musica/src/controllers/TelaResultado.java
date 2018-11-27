@@ -62,7 +62,7 @@ public class TelaResultado implements Initializable {
 	
 	public void salvarMusica(ActionEvent event) {
 		AudioPlayer audioPlayer = dadosModel.getAudioPlayer();
-		audioPlayer.SalvarMusica();		
+		audioPlayer.salvarMusica();		
 	}
 	
 	public void inicioMusica(ActionEvent event) {

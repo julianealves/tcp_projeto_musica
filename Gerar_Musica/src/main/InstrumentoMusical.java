@@ -25,7 +25,7 @@ public class InstrumentoMusical {
 		return Integer.toString(InstrumentoMusicalAtual);
 	}
 	
-	public void AtualizarIntrumentoMusical(int FatorDeSoma) {
+	public void atualizarIntrumentoMusical(int FatorDeSoma) {
 		if (InstrumentoMusicalAtual + FatorDeSoma >= INSTRUMENTO_NUMERO_0 && InstrumentoMusicalAtual + FatorDeSoma <= INSTRUMENTO_NUMERO_127) {
 			InstrumentoMusicalAtual = InstrumentoMusicalAtual + FatorDeSoma;
 		}

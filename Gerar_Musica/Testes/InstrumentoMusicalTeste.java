@@ -15,19 +15,19 @@ public class InstrumentoMusicalTeste {
 		assertEquals("127", InstrumentoMusical.getIntrumentoMusicalAtual());
 		
 		InstrumentoMusical.setIntrumentoMusicalAtual(120);
-		InstrumentoMusical.AtualizarIntrumentoMusical(10);
+		InstrumentoMusical.atualizarIntrumentoMusical(10);
 		assertEquals("120", InstrumentoMusical.getIntrumentoMusicalAtual());
 		
 		InstrumentoMusical.setIntrumentoMusicalAtual(100);
-		InstrumentoMusical.AtualizarIntrumentoMusical(10);
+		InstrumentoMusical.atualizarIntrumentoMusical(10);
 		assertEquals("110", InstrumentoMusical.getIntrumentoMusicalAtual());
 		
 		InstrumentoMusical.setIntrumentoMusicalAtual(0);
-		InstrumentoMusical.AtualizarIntrumentoMusical(-1);
+		InstrumentoMusical.atualizarIntrumentoMusical(-1);
 		assertEquals("0", InstrumentoMusical.getIntrumentoMusicalAtual());
 		
 		InstrumentoMusical.setIntrumentoMusicalAtual(54);
-		InstrumentoMusical.AtualizarIntrumentoMusical(-4);
+		InstrumentoMusical.atualizarIntrumentoMusical(-4);
 		assertEquals("50", InstrumentoMusical.getIntrumentoMusicalAtual());
 		
 		InstrumentoMusical.setIntrumentoMusicalAtual(-1);

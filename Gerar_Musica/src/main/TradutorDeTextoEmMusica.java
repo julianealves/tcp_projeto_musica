@@ -33,7 +33,7 @@ public class TradutorDeTextoEmMusica {
 		return this.TextoTraduzido;
 	}
 	
-	private void InserirNotaMusical(String NotaMusical) {
+	private void inserirNotaMusical(String NotaMusical) {
 		if (this.TextoTraduzido.isEmpty()) {
 			this.TextoTraduzido = NotaMusical;
 		}
@@ -43,31 +43,31 @@ public class TradutorDeTextoEmMusica {
 		}
 	}
 	
-	private boolean CaractereAnteriorEraNotaMusical(char CaractereAnterior) {
+	private boolean caractereAnteriorEraNotaMusical(char CaractereAnterior) {
 		if (CaractereAnterior >= NOTA_MUSICAL_LA && CaractereAnterior <= NOTA_MUSICAL_SOL) {
 			return true;
 		}
 		return false;
 	}
 	
-	private void AlterarOitavaMusical(char CaractereAtual) {
+	private void alterarOitavaMusical(char CaractereAtual) {
 		configOitava.incrementaOitava();
 	}
 	
-	private String DeterminarNotaMusical(String NotaMusicalAnterior, char CaractereAnterior) {
-		if(this.CaractereAnteriorEraNotaMusical(CaractereAnterior)) {
+	private String determinarNotaMusical(String NotaMusicalAnterior, char CaractereAnterior) {
+		if(this.caractereAnteriorEraNotaMusical(CaractereAnterior)) {
 			return NotaMusicalAnterior;
 		}
 		return SILENCIO;
 	}
 	
-	private String DefinirNotaMusicalAtual(String NotaMusicalAnterior, char CaractereAtual, char CaractereAnterior) {
+	private String definirNotaMusicalAtual(String NotaMusicalAnterior, char CaractereAtual, char CaractereAnterior) {
 		String NotaMusicalAtual = "";
 		if(CaractereAtual == '?' || CaractereAtual == '.') {
-			AlterarOitavaMusical(CaractereAtual);
+			alterarOitavaMusical(CaractereAtual);
 		}
 		else if(CaractereAtual > NOTA_MUSICAL_SOL || CaractereAtual < NOTA_MUSICAL_LA) {
-			NotaMusicalAtual = DeterminarNotaMusical(NotaMusicalAnterior, CaractereAnterior);
+			NotaMusicalAtual = determinarNotaMusical(NotaMusicalAnterior, CaractereAnterior);
 		}
 		else {
 			NotaMusicalAtual = NotaMusicalAnterior;
@@ -97,10 +97,10 @@ public class TradutorDeTextoEmMusica {
 		TamanhoDoTexto = this.TextoBruto.length();
 		for (int indice = 0; indice < TamanhoDoTexto; indice++) {
 			CaractereAtual = this.TextoBruto.charAt(indice);
-			NotaMusicalAtual = DicionarioDeNotas.TraduzirCaractere(String.valueOf(CaractereAtual));
+			NotaMusicalAtual = DicionarioDeNotas.traduzirCaractere(String.valueOf(CaractereAtual));
 			
 			if (NotaMusicalAtual.equals("none")) {
-				NotaMusicalAtual = DefinirNotaMusicalAtual(NotaMusicalAnterior, CaractereAtual, CaractereAnterior);
+				NotaMusicalAtual = definirNotaMusicalAtual(NotaMusicalAnterior, CaractereAtual, CaractereAnterior);
 			}
 			else {
 				if (isNotaMusicalPura(NotaMusicalAtual)) {
@@ -109,7 +109,7 @@ public class TradutorDeTextoEmMusica {
 			}
 			
 			if (! isMudancaDePropriedade(NotaMusicalAtual)) {
-				this.InserirNotaMusical(NotaMusicalAtual);
+				this.inserirNotaMusical(NotaMusicalAtual);
 				NotaMusicalAnterior = NotaMusicalAtual;
 				CaractereAnterior = CaractereAtual;
 			}

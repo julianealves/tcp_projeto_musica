@@ -1,7 +1,6 @@
 package controllers;
 
 import main.AudioPlayer;
-import main.Musica;
 
 public class ControlePlayerThread implements Runnable{
 	

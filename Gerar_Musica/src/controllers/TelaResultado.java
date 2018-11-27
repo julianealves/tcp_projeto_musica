@@ -1,25 +1,18 @@
 package controllers;
 
-import java.awt.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.jfoenix.controls.JFXScrollPane;
-
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import main.AudioPlayer;
-import main.Musica;
-import main.TradutorDeTextoEmMusica;
 
 public class TelaResultado implements Initializable {
 	
@@ -68,7 +61,8 @@ public class TelaResultado implements Initializable {
 	}
 	
 	public void salvarMusica(ActionEvent event) {
-		
+		AudioPlayer audioPlayer = dadosModel.getAudioPlayer();
+		audioPlayer.SalvarMusica();		
 	}
 	
 	public void inicioMusica(ActionEvent event) {

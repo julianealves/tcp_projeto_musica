@@ -8,7 +8,15 @@ public class OitavaMusical {
 	
 	
 	public OitavaMusical(int oitavaDefault) {
-		oitavaAtual = oitavaDefault;
+		if (oitavaDefault > OITAVA_MAXIMA) {
+			oitavaAtual = OITAVA_MAXIMA;
+		}
+		else if(oitavaDefault < OITAVA_MINIMA) {
+			oitavaAtual = OITAVA_MINIMA;
+		}
+		else {
+			oitavaAtual = oitavaDefault;
+		}
 	}
 	
 	private boolean isOitavaMaxima() {

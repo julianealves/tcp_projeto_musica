@@ -1,5 +1,7 @@
 package main;
 
+import java.util.regex.Pattern;
+
 public class Musica {
 	private String textoBruto;
 	private String codificacaoJFugue;
@@ -14,12 +16,18 @@ public class Musica {
 		ritmo  =  new Ritmo(0);
 		oitava =  new OitavaMusical(5);
 		InstrumentoMusical = new InstrumentoMusical();
+		codificacaoJFugue = "";
 		
 		textoBruto = textoACodificar;
 	}
 	
+	private void limparCodificacaoJFugue() {
+		codificacaoJFugue = "";
+	}
+	
 	public void setTextoBruto(String textoACodificar) {
 		textoBruto = textoACodificar;
+		limparCodificacaoJFugue();
 	}
 	
 	public String getCodificacaoJFugue() {
@@ -56,7 +64,6 @@ public class Musica {
 				indice = indice + 1;
 			}
 			else {
-				codificacaoJFugue = codificacaoJFugue.replaceFirst(fator, "");
 				finalizarProcura = true;
 			}
 		}
@@ -78,13 +85,11 @@ public class Musica {
 				indice = indice + 1;
 			}
 			else {
-				codificacaoJFugue = codificacaoJFugue.replaceFirst(instrumentoMusical, "");
 				finalizarProcura = true;
 			}			
 		}
 		
 		return Integer.parseInt(instrumentoMusical);
-		
 	}
 	
 	private boolean aindaHaVolume() {
@@ -131,16 +136,14 @@ public class Musica {
 				fatorDeMultiplicidade = pegarFatorDeMultiplicidade(indiceInicialMudanca);
 				volume.multiplicaVolume(fatorDeMultiplicidade);
 				volumeFormatoJFugue = "X[Volume]=" + volume.getVolume();
-				codificacaoJFugue = codificacaoJFugue.replaceFirst("VOLU__", volumeFormatoJFugue);
-				
+				codificacaoJFugue = codificacaoJFugue.replaceFirst("VOLU_" + Float.toString(fatorDeMultiplicidade) + "_", volumeFormatoJFugue);
 			}
 			
 			else {//Volume Down
 				volume.divideVolume((float) 2.0);
 				volumeFormatoJFugue = "X[Volume]=" + volume.getVolume();
 				codificacaoJFugue = codificacaoJFugue.replaceFirst("VOLD", volumeFormatoJFugue);
-			}
-			
+			}	
 		}
 	}
 	
@@ -154,20 +157,21 @@ public class Musica {
 			indiceInicialMudanca = codificacaoJFugue.indexOf("INSTRUMENTO");
 			if (ehFatorDeSoma(indiceInicialMudanca)) {
 				numeroDoInstrumento = pegarInstrumentoMusical(indiceInicialMudanca, 13);
-				InstrumentoMusical.AtualizarIntrumentoMusical(numeroDoInstrumento);
+				InstrumentoMusical.somarFatorInstrumentoAtual(numeroDoInstrumento);
 				possuiFatorDeSoma = true;
 			}
 			else {
 				numeroDoInstrumento = pegarInstrumentoMusical(indiceInicialMudanca, 12);
-				InstrumentoMusical.setIntrumentoMusicalAtual(numeroDoInstrumento);
+				InstrumentoMusical.setInstrumentoMusicalAtual(numeroDoInstrumento);
 			}
 			
-			instrumentoFormatoJFugue = "I" + InstrumentoMusical.getIntrumentoMusicalAtual();
+			instrumentoFormatoJFugue = "I" + InstrumentoMusical.getInstrumentoMusicalAtual();
 			if (possuiFatorDeSoma) {
-				codificacaoJFugue = codificacaoJFugue.replaceFirst("INSTRUMENTOF__", instrumentoFormatoJFugue);
+				String stringParaTrocar = Pattern.quote("INSTRUMENTOF_" + Integer.toString(numeroDoInstrumento) + "_");
+				codificacaoJFugue = codificacaoJFugue.replaceFirst(stringParaTrocar, instrumentoFormatoJFugue);
 			}
 			else {
-				codificacaoJFugue = codificacaoJFugue.replaceFirst("INSTRUMENTO__", instrumentoFormatoJFugue);
+				codificacaoJFugue = codificacaoJFugue.replaceFirst("INSTRUMENTO_" + InstrumentoMusical.getInstrumentoMusicalAtual() +  "_", instrumentoFormatoJFugue);
 			}
 			
 			possuiFatorDeSoma = false;
@@ -177,12 +181,10 @@ public class Musica {
 	
 	public void recodificacaoJFugue(TradutorDeTextoEmMusica codificador) {
 		codificador.setTextoBruto(textoBruto);
-		codificador.setConfiguracaoPadrao(volume, oitava, ritmo);
-		codificacaoJFugue = codificador.TraduzirTextoEmMusica();
+		codificacaoJFugue = codificador.TraduzirTextoEmMusica(oitava);
 		ajustaRitmo();
 		ajustaVolume();
-		ajustaInstrumentoMusical();
-				
+		ajustaInstrumentoMusical();		
 	}
 
 }

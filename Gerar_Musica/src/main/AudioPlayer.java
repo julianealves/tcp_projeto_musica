@@ -20,7 +20,7 @@ public class AudioPlayer {
 		musicaPadronizada = new Pattern(musica); 
 	}
 	
-	public void TocarMusica() {
+	public void tocarMusica() {
 		ManagedPlayer controle = player.getManagedPlayer();
 		
 		if (controle.isPaused()) {
@@ -31,27 +31,40 @@ public class AudioPlayer {
 			player.play(musicaPadronizada);
 		}
 		
-		else if (controle.isFinished()) {
-			controle.reset();
+		else {
+			player = new Player();
+			player.play(musicaPadronizada);
 		}
+		
+		
 		
 	}
 	
-	public void PausaMusica() {
+	public void pausaMusica() {
 		ManagedPlayer controle = player.getManagedPlayer();
 		if (controle.isPlaying()) {
 			controle.pause();
 		}
 		
 	}
-	
+
 	public void SalvarMusica(File arquivo) {
 		try {
 			MidiFileManager.savePatternToMidi(musicaPadronizada, arquivo);
 			System.out.println("Arquivo salvo");
 		} catch (IOException e)
 		{
-			System.out.println("Nao foi possivel salvar o arquivo");
+			System.out.println("--->Nao foi possivel salvar o arquivo");
 		}
+	}
+	
+	public boolean isPlaying() {
+		ManagedPlayer playerControl = player.getManagedPlayer();
+		
+		return playerControl.isPlaying();
+	}
+	
+	public ManagedPlayer getManagedPlayer() {
+		return player.getManagedPlayer();
 	}
 }

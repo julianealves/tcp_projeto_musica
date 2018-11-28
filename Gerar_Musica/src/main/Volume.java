@@ -1,22 +1,36 @@
 package main;
 public class Volume {
 	private final int VOLUME_MAXIMO = 16383;
+	private final int VOLUME_MINIMO = 0;
 	private int volumeAtual;
 	
 	
 	public Volume(int volumePadrao) {
-		volumeAtual = volumePadrao;
+		if (volumePadrao > VOLUME_MAXIMO) {
+			volumeAtual = VOLUME_MAXIMO;
+		}
+		else if (volumePadrao < VOLUME_MINIMO) {
+			volumeAtual = VOLUME_MINIMO;
+		}
+		else {
+			volumeAtual = volumePadrao;
+		}		
 	}
 	
 	//Volume satura no volume maximo
 	public void multiplicaVolume(float fator) {
-		if ((int) (volumeAtual * fator) <= VOLUME_MAXIMO) {
+		if (fator >= 0 && (int) (volumeAtual * fator) <= VOLUME_MAXIMO) {
 			volumeAtual = (int) (volumeAtual*fator);
 		}
-	
+		else {
+			volumeAtual = VOLUME_MAXIMO;
+		}
 	}
+	
 	public void divideVolume(float fator) {
-		volumeAtual = (int) (volumeAtual/fator);
+		if (fator > 0) {
+			volumeAtual = (int) (volumeAtual/fator);
+		}
 	}
 	
 	public int getVolume() {
@@ -24,6 +38,15 @@ public class Volume {
 	}
 	
 	public void setVolume(int novoVolume) {
-		volumeAtual = novoVolume;
+		if (novoVolume > VOLUME_MAXIMO) {
+			volumeAtual = VOLUME_MAXIMO;
+		}
+		else if(novoVolume < VOLUME_MINIMO){
+			volumeAtual = VOLUME_MINIMO;
+		}
+		else {
+			volumeAtual = novoVolume;
+		}
+		
 	}
 }

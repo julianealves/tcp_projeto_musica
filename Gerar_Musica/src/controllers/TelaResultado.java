@@ -1,6 +1,7 @@
 package controllers;
 
 import java.awt.Label;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -17,6 +18,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import main.AudioPlayer;
 import main.Musica;
 import main.TradutorDeTextoEmMusica;
@@ -68,7 +70,17 @@ public class TelaResultado implements Initializable {
 	}
 	
 	public void salvarMusica(ActionEvent event) {
+		FileChooser janelaSalvar = new FileChooser();
 		
+		janelaSalvar.setTitle("Salvar arquivo MIDI");
+		janelaSalvar.setInitialDirectory(new File(System.getProperty("user.home")));
+		janelaSalvar.getExtensionFilters().add(new FileChooser.ExtensionFilter(".MIDI", "*.midi"));
+	
+		File arquivo = janelaSalvar.showSaveDialog(dadosModel.getJanela());
+		
+		if (arquivo != null) {
+            dadosModel.getAudioPlayer().SalvarMusica(arquivo);
+        }
 	}
 	
 	public void inicioMusica(ActionEvent event) {

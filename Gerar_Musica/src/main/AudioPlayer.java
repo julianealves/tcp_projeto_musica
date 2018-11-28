@@ -45,9 +45,9 @@ public class AudioPlayer {
 		
 	}
 	
-	public void SalvarMusica() {
+	public void SalvarMusica(File arquivo) {
 		try {
-			MidiFileManager.savePatternToMidi(musicaPadronizada, new File("MinhaMusica.midi"));
+			MidiFileManager.savePatternToMidi(musicaPadronizada, arquivo);
 			System.out.println("Arquivo salvo");
 		} catch (IOException e)
 		{

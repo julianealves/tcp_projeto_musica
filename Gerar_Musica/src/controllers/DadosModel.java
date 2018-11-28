@@ -15,13 +15,11 @@ public class DadosModel {
 	private Stage janela;
 	public HashMap<TelasID, Scene> telas = new HashMap<TelasID, Scene>();
 	
-	private AudioPlayer player;
-	
-	
 	private final StringProperty textoOriginal = new SimpleStringProperty("");
 	private final StringProperty textoTraduzido = new SimpleStringProperty("");
 	
 	private Musica musica;
+	private AudioPlayer player;
 	
 	public enum TelasID {
 		TELA_ENTRADA, TELA_RESULTADO;

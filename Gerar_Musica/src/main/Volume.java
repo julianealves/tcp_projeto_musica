@@ -19,7 +19,7 @@ public class Volume {
 	
 	//Volume satura no volume maximo
 	public void multiplicaVolume(float fator) {
-		if ((int) (volumeAtual * fator) <= VOLUME_MAXIMO && fator >= 0) {
+		if (fator >= 0 && (int) (volumeAtual * fator) <= VOLUME_MAXIMO) {
 			volumeAtual = (int) (volumeAtual*fator);
 		}
 		else {

@@ -9,7 +9,7 @@ public class InstrumentoMusical {
 		InstrumentoMusicalAtual = INSTRUMENTO_NUMERO_0;
 	}
 	
-	public void setIntrumentoMusicalAtual(int NumeroDoInstrumento) {
+	public void setInstrumentoMusicalAtual(int NumeroDoInstrumento) {
 		if (NumeroDoInstrumento > INSTRUMENTO_NUMERO_127) {
 			InstrumentoMusicalAtual = INSTRUMENTO_NUMERO_127;
 		}
@@ -21,11 +21,11 @@ public class InstrumentoMusical {
 		}
 	}
 	
-	public String getIntrumentoMusicalAtual() {
+	public String getInstrumentoMusicalAtual() {
 		return Integer.toString(InstrumentoMusicalAtual);
 	}
 	
-	public void atualizarIntrumentoMusical(int FatorDeSoma) {
+	public void somarFatorInstrumentoAtual(int FatorDeSoma) {
 		if (InstrumentoMusicalAtual + FatorDeSoma >= INSTRUMENTO_NUMERO_0 && InstrumentoMusicalAtual + FatorDeSoma <= INSTRUMENTO_NUMERO_127) {
 			InstrumentoMusicalAtual = InstrumentoMusicalAtual + FatorDeSoma;
 		}

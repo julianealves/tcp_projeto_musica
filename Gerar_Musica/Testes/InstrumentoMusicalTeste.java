@@ -9,29 +9,29 @@ public class InstrumentoMusicalTeste {
 	@Test
 	public void test() {
 		InstrumentoMusical InstrumentoMusical = new InstrumentoMusical();
-		assertEquals("0", InstrumentoMusical.getIntrumentoMusicalAtual());
+		assertEquals("0", InstrumentoMusical.getInstrumentoMusicalAtual());
 		
-		InstrumentoMusical.setIntrumentoMusicalAtual(128);
-		assertEquals("127", InstrumentoMusical.getIntrumentoMusicalAtual());
+		InstrumentoMusical.setInstrumentoMusicalAtual(128);
+		assertEquals("127", InstrumentoMusical.getInstrumentoMusicalAtual());
 		
-		InstrumentoMusical.setIntrumentoMusicalAtual(120);
-		InstrumentoMusical.atualizarIntrumentoMusical(10);
-		assertEquals("120", InstrumentoMusical.getIntrumentoMusicalAtual());
+		InstrumentoMusical.setInstrumentoMusicalAtual(120);
+		InstrumentoMusical.somarFatorInstrumentoAtual(10);
+		assertEquals("120", InstrumentoMusical.getInstrumentoMusicalAtual());
 		
-		InstrumentoMusical.setIntrumentoMusicalAtual(100);
-		InstrumentoMusical.atualizarIntrumentoMusical(10);
-		assertEquals("110", InstrumentoMusical.getIntrumentoMusicalAtual());
+		InstrumentoMusical.setInstrumentoMusicalAtual(100);
+		InstrumentoMusical.somarFatorInstrumentoAtual(10);
+		assertEquals("110", InstrumentoMusical.getInstrumentoMusicalAtual());
 		
-		InstrumentoMusical.setIntrumentoMusicalAtual(0);
-		InstrumentoMusical.atualizarIntrumentoMusical(-1);
-		assertEquals("0", InstrumentoMusical.getIntrumentoMusicalAtual());
+		InstrumentoMusical.setInstrumentoMusicalAtual(0);
+		InstrumentoMusical.somarFatorInstrumentoAtual(-1);
+		assertEquals("0", InstrumentoMusical.getInstrumentoMusicalAtual());
 		
-		InstrumentoMusical.setIntrumentoMusicalAtual(54);
-		InstrumentoMusical.atualizarIntrumentoMusical(-4);
-		assertEquals("50", InstrumentoMusical.getIntrumentoMusicalAtual());
+		InstrumentoMusical.setInstrumentoMusicalAtual(54);
+		InstrumentoMusical.somarFatorInstrumentoAtual(-4);
+		assertEquals("50", InstrumentoMusical.getInstrumentoMusicalAtual());
 		
-		InstrumentoMusical.setIntrumentoMusicalAtual(-1);
-		assertEquals("0", InstrumentoMusical.getIntrumentoMusicalAtual());
+		InstrumentoMusical.setInstrumentoMusicalAtual(-1);
+		assertEquals("0", InstrumentoMusical.getInstrumentoMusicalAtual());
 	}
 
 }

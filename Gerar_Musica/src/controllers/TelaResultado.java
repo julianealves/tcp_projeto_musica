@@ -74,17 +74,23 @@ public class TelaResultado implements Initializable {
 	}
 	
 	public void tocarMusica(ActionEvent event) {
-		Runnable controleMusica;
 		
-		if (iconePausarPlay.getGlyphName() == "PAUSE") {
+		AudioPlayer player = dadosModel.getAudioPlayer();
+		Runnable controleMusica = new ControlePlayerThread(player);
+		
+		if(iconePausarPlay.getGlyphName() == "PAUSE") {
 			iconePausarPlay.setGlyphName("PLAY");
-			controleMusica = new ControlePlayerThread(dadosModel.getAudioPlayer(),"PAUSE");
-		} else {
-			iconePausarPlay.setGlyphName("PAUSE");
-			controleMusica = new ControlePlayerThread(dadosModel.getAudioPlayer(),"PLAY");
+			player.pausaMusica();
 		}
-		
-		new Thread(controleMusica).start();	
+		else { // iconePausarPlay.getGlyphName() == "PLAY"
+			iconePausarPlay.setGlyphName("PAUSE");
+			if (!player.isPlaying()) {
+				new Thread(controleMusica).start();	
+			}
+			
+			
+		}
+				
 	}
 	
 	public void voltarTelaEntrada(ActionEvent event) {

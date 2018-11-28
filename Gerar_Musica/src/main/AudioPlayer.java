@@ -31,9 +31,12 @@ public class AudioPlayer {
 			player.play(musicaPadronizada);
 		}
 		
-		else if (controle.isFinished()) {
-			controle.reset();
+		else {
+			player = new Player();
+			player.play(musicaPadronizada);
 		}
+		
+		
 		
 	}
 	
@@ -53,5 +56,15 @@ public class AudioPlayer {
 		{
 			System.out.println("--->Nao foi possivel salvar o arquivo");
 		}
+	}
+	
+	public boolean isPlaying() {
+		ManagedPlayer playerControl = player.getManagedPlayer();
+		
+		return playerControl.isPlaying();
+	}
+	
+	public ManagedPlayer getManagedPlayer() {
+		return player.getManagedPlayer();
 	}
 }

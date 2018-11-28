@@ -2,27 +2,25 @@ package controllers;
 
 import main.AudioPlayer;
 
+
 public class ControlePlayerThread implements Runnable{
 	
 	private AudioPlayer player;
 	private String actionToPerform;
 	
-	public ControlePlayerThread(AudioPlayer playerControlado, String Action) {
+	public ControlePlayerThread(AudioPlayer playerControlado) {
 		player = playerControlado;
-		actionToPerform = Action;
+		
 	}
 	
 	@Override
 	public void run() {
-		switch(actionToPerform) {
-			case "PLAY"	: player.tocarMusica();
-						  break;
-			case "PAUSE": player.pausaMusica();
-						  break;
-		    default:	break;
-						 
-		}
-	
+		//Enquanto a musica não acaba, player fica pendurado na thread
+		player.tocarMusica();
+		
+		//TODO:Implementar a troca de ui quando a música acaba (AQUI)
+		//iconePausarPlay.setGlyphName("PLAY");
+		
 	}
 
 }

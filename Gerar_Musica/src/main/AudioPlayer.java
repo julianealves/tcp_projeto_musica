@@ -28,12 +28,12 @@ public class AudioPlayer {
 		}
 		
 		else if (!controle.isStarted()) {
-			player.play(musicaPadronizada);
+			player.delayPlay(100, musicaPadronizada);
 		}
 		
 		else {
 			player = new Player();
-			player.play(musicaPadronizada);
+			player.delayPlay(100, musicaPadronizada);
 		}
 	}
 	

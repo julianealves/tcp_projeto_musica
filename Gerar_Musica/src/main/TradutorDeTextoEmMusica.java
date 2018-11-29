@@ -2,7 +2,7 @@ package main;
 
 public class TradutorDeTextoEmMusica {
 	private String TextoBruto;
-	private String TextoTraduzido;
+	private String TextoTraduzido = "";
 	private static Dicionario DicionarioDeNotas;
 	private final char NOTA_MUSICAL_SOL = 'G';
 	private final char NOTA_MUSICAL_LA = 'A';

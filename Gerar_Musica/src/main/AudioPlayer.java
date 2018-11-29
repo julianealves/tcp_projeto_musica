@@ -1,6 +1,7 @@
 package main;
 //import org.jfugue.*;
 import java.io.File;
+import java.io.IOException;
 
 import org.jfugue.pattern.Pattern;
 import org.jfugue.player.ManagedPlayer;

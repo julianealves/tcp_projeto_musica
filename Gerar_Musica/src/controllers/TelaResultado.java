@@ -88,10 +88,6 @@ public class TelaResultado implements Initializable {
 	
 	public void inicioMusica(ActionEvent event) {
 		
-		ManagedPlayer controladorPlayer = dadosModel.getAudioPlayer().getManagedPlayer();
-		System.out.println(controladorPlayer.getTickPosition());
-		controladorPlayer.seek(controladorPlayer.getTickPosition()+1000);
-		System.out.println(controladorPlayer.getTickPosition());
 	}
 	
 	public void fimMusica(ActionEvent event) {
@@ -99,12 +95,10 @@ public class TelaResultado implements Initializable {
 	}
 	
 	public void tocarMusica(ActionEvent event) {
-		
 		AudioPlayer player = dadosModel.getAudioPlayer();
 		Runnable controleMusica = new ControlePlayerThread(player);
 		
-		ManagedPlayer controladorPlayer = dadosModel.getAudioPlayer().getManagedPlayer();
-		System.out.println(controladorPlayer.getTickLength());
+		ManagedPlayer controladorPlayer = player.getManagedPlayer();
 		controladorPlayer.addManagedPlayerListener(new ManagedPlayerListener() {
 			@Override
 			public void onFinished() {
@@ -125,15 +119,20 @@ public class TelaResultado implements Initializable {
 			trocarIcone(iconePausarPlay, "PAUSE");
 			if (!player.isPlaying()) {
 				Thread thread = new Thread(controleMusica);
-				thread.start();
 				thread.setDaemon(true);
+				thread.start();
 			}
 		}	
 	}
 	
 	public void voltarTelaEntrada(ActionEvent event) {
+		trocarIcone(iconePausarPlay, "PLAY"); //garantir botao de play na proxima vez
+		
+		AudioPlayer toBeFinished = dadosModel.getAudioPlayer();
+		
 		dadosModel.getJanela().setScene(dadosModel.telas.get(DadosModel.TelasID.TELA_ENTRADA));
 		dadosModel.getJanela().show();
+		toBeFinished.getManagedPlayer().finish();
 	}
 	
 	private void trocarIcone(FontAwesomeIconView icone, String nomeIcone) {

@@ -1,15 +1,6 @@
 package main;
 //import org.jfugue.*;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.RandomAccessFile;
-import java.nio.channels.FileChannel;
-import java.nio.channels.FileLock;
-import java.nio.channels.OverlappingFileLockException;
-
-import javax.sound.midi.InvalidMidiDataException;
 
 import org.jfugue.pattern.Pattern;
 import org.jfugue.player.ManagedPlayer;

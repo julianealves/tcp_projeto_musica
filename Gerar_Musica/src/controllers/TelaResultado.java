@@ -5,6 +5,14 @@ package controllers;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.sound.midi.Sequence;
+
+import org.jfugue.midi.MidiDefaults;
+import org.jfugue.player.ManagedPlayer;
+import org.jfugue.player.ManagedPlayerListener;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
@@ -53,7 +61,7 @@ public class TelaResultado implements Initializable {
 	
 	private void criarConteudoTab(Text texto, Tab tab) {
 		StackPane paneTexto = new StackPane(texto);
-		StackPane.setMargin(textoOriginal, new Insets(15.0));
+		StackPane.setMargin(texto, new Insets(15.0));
 		
 		ScrollPane scrollPane = new ScrollPane();
 		
@@ -80,6 +88,10 @@ public class TelaResultado implements Initializable {
 	
 	public void inicioMusica(ActionEvent event) {
 		
+		ManagedPlayer controladorPlayer = dadosModel.getAudioPlayer().getManagedPlayer();
+		System.out.println(controladorPlayer.getTickPosition());
+		controladorPlayer.seek(controladorPlayer.getTickPosition()+1000);
+		System.out.println(controladorPlayer.getTickPosition());
 	}
 	
 	public void fimMusica(ActionEvent event) {
@@ -91,19 +103,32 @@ public class TelaResultado implements Initializable {
 		AudioPlayer player = dadosModel.getAudioPlayer();
 		Runnable controleMusica = new ControlePlayerThread(player);
 		
-		if(iconePausarPlay.getGlyphName() == "PAUSE") {
-			iconePausarPlay.setGlyphName("PLAY");
-			player.pausaMusica();
-		}
-		else { // iconePausarPlay.getGlyphName() == "PLAY"
-			iconePausarPlay.setGlyphName("PAUSE");
-			if (!player.isPlaying()) {
-				new Thread(controleMusica).start();	
+		ManagedPlayer controladorPlayer = dadosModel.getAudioPlayer().getManagedPlayer();
+		System.out.println(controladorPlayer.getTickLength());
+		controladorPlayer.addManagedPlayerListener(new ManagedPlayerListener() {
+			@Override
+			public void onFinished() {
+				trocarIcone(iconePausarPlay, "PLAY");
 			}
-			
-			
-		}
-				
+
+			@Override public void onPaused() {}
+			@Override public void onReset() {}
+			@Override public void onResumed() {}
+			@Override public void onSeek(long arg0) {}
+			@Override public void onStarted(Sequence arg0) {}
+		});
+		
+		if(iconePausarPlay.getGlyphName() == "PAUSE") {
+			trocarIcone(iconePausarPlay, "PLAY");
+			player.pausaMusica();
+		} else { // iconePausarPlay.getGlyphName() == "PLAY"
+			trocarIcone(iconePausarPlay, "PAUSE");
+			if (!player.isPlaying()) {
+				Thread thread = new Thread(controleMusica);
+				thread.start();
+				thread.setDaemon(true);
+			}
+		}	
 	}
 	
 	public void voltarTelaEntrada(ActionEvent event) {
@@ -111,4 +136,7 @@ public class TelaResultado implements Initializable {
 		dadosModel.getJanela().show();
 	}
 	
+	private void trocarIcone(FontAwesomeIconView icone, String nomeIcone) {
+		icone.setGlyphName(nomeIcone);
+	}
 }

@@ -35,9 +35,6 @@ public class AudioPlayer {
 			player = new Player();
 			player.play(musicaPadronizada);
 		}
-		
-		
-		
 	}
 	
 	public void pausaMusica() {
@@ -60,7 +57,6 @@ public class AudioPlayer {
 	
 	public boolean isPlaying() {
 		ManagedPlayer playerControl = player.getManagedPlayer();
-		
 		return playerControl.isPlaying();
 	}
 	

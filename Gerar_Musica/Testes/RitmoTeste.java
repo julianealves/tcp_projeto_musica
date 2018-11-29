@@ -8,62 +8,62 @@ public class RitmoTeste {
 
 	@Test
 	public void test() {
-		Ritmo ritmo = new Ritmo(10);
-		assertEquals("Vivace", ritmo.getRitmoAtual());
+		Ritmo ritmo_teste1 = new Ritmo(10);
+		assertEquals("Vivace", ritmo_teste1.getRitmoAtual());
 		
-		ritmo.aumentaRitmo();
-		assertEquals("Presto", ritmo.getRitmoAtual());
+		ritmo_teste1.aumentaRitmo();
+		assertEquals("Presto", ritmo_teste1.getRitmoAtual());
 		
-		ritmo.aumentaRitmo();
-		assertEquals("Pretissimo", ritmo.getRitmoAtual());
+		ritmo_teste1.aumentaRitmo();
+		assertEquals("Pretissimo", ritmo_teste1.getRitmoAtual());
 		
-		ritmo.aumentaRitmo();
-		assertEquals("Pretissimo", ritmo.getRitmoAtual());
+		ritmo_teste1.aumentaRitmo();
+		assertEquals("Pretissimo", ritmo_teste1.getRitmoAtual());
 		
-		ritmo.diminuiRitmo();
-		assertEquals("Presto", ritmo.getRitmoAtual());
+		ritmo_teste1.diminuiRitmo();
+		assertEquals("Presto", ritmo_teste1.getRitmoAtual());
 		
-		ritmo.diminuiRitmo();
-		assertEquals("Vivace", ritmo.getRitmoAtual());
+		ritmo_teste1.diminuiRitmo();
+		assertEquals("Vivace", ritmo_teste1.getRitmoAtual());
 		
-		ritmo.diminuiRitmo();
-		assertEquals("Allegro", ritmo.getRitmoAtual());
+		ritmo_teste1.diminuiRitmo();
+		assertEquals("Allegro", ritmo_teste1.getRitmoAtual());
 		
-		ritmo.diminuiRitmo();
-		assertEquals("Moderato", ritmo.getRitmoAtual());
+		ritmo_teste1.diminuiRitmo();
+		assertEquals("Moderato", ritmo_teste1.getRitmoAtual());
 		
-		ritmo.diminuiRitmo();
-		assertEquals("Andantino", ritmo.getRitmoAtual());
+		ritmo_teste1.diminuiRitmo();
+		assertEquals("Andantino", ritmo_teste1.getRitmoAtual());
 		
-		ritmo.diminuiRitmo();
-		assertEquals("Andante", ritmo.getRitmoAtual());
+		ritmo_teste1.diminuiRitmo();
+		assertEquals("Andante", ritmo_teste1.getRitmoAtual());
 		
-		ritmo.diminuiRitmo();
-		assertEquals("Adagietto", ritmo.getRitmoAtual());
+		ritmo_teste1.diminuiRitmo();
+		assertEquals("Adagietto", ritmo_teste1.getRitmoAtual());
 		
-		ritmo.diminuiRitmo();
-		assertEquals("Adagio", ritmo.getRitmoAtual());	
+		ritmo_teste1.diminuiRitmo();
+		assertEquals("Adagio", ritmo_teste1.getRitmoAtual());	
 		
-		ritmo.diminuiRitmo();
-		assertEquals("Lento", ritmo.getRitmoAtual());	
+		ritmo_teste1.diminuiRitmo();
+		assertEquals("Lento", ritmo_teste1.getRitmoAtual());	
 		
-		ritmo.diminuiRitmo();
-		assertEquals("Larghetto", ritmo.getRitmoAtual());
+		ritmo_teste1.diminuiRitmo();
+		assertEquals("Larghetto", ritmo_teste1.getRitmoAtual());
 		
-		ritmo.diminuiRitmo();
-		assertEquals("Largo", ritmo.getRitmoAtual());
+		ritmo_teste1.diminuiRitmo();
+		assertEquals("Largo", ritmo_teste1.getRitmoAtual());
 		
-		ritmo.diminuiRitmo();
-		assertEquals("Grave", ritmo.getRitmoAtual());
+		ritmo_teste1.diminuiRitmo();
+		assertEquals("Grave", ritmo_teste1.getRitmoAtual());
 		
-		ritmo.diminuiRitmo();
-		assertEquals("Grave", ritmo.getRitmoAtual());	
+		ritmo_teste1.diminuiRitmo();
+		assertEquals("Grave", ritmo_teste1.getRitmoAtual());	
 		
-		Ritmo ritmo2 = new Ritmo(13);
-		assertEquals("Pretissimo", ritmo2.getRitmoAtual());
+		Ritmo ritmo_teste2 = new Ritmo(13);
+		assertEquals("Pretissimo", ritmo_teste2.getRitmoAtual());
 		
-		Ritmo ritmo3 = new Ritmo(-1);
-		assertEquals("Grave", ritmo3.getRitmoAtual());
+		Ritmo ritmo_teste3 = new Ritmo(-1);
+		assertEquals("Grave", ritmo_teste3.getRitmoAtual());
 	}
 
 }

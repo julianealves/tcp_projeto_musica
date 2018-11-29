@@ -6,6 +6,7 @@ public class TradutorDeTextoEmMusica {
 	private static Dicionario DicionarioDeNotas;
 	private final char NOTA_MUSICAL_SOL = 'G';
 	private final char NOTA_MUSICAL_LA = 'A';
+	private final char NOTA_MUSICAL_DO = 'B';
 	private final String SILENCIO = "R";
 	OitavaMusical configOitava;
 	
@@ -84,6 +85,16 @@ public class TradutorDeTextoEmMusica {
 		return NotaMusical.length() == 1;
 	}
 	
+	private boolean notaMusicalAceitaOitava(String NotaMusical, int oitavaMusical) {
+		boolean aceitaOitava = true;
+		if(NotaMusical.charAt(0) == NOTA_MUSICAL_LA || NotaMusical.charAt(0) == NOTA_MUSICAL_DO) {
+			if (oitavaMusical == 10) {
+				aceitaOitava = false;
+			}
+		}
+		return aceitaOitava;
+	}
+	
 	public String TraduzirTextoEmMusica(OitavaMusical oitavaPadrao) {
 		int TamanhoDoTexto;
 		String NotaMusicalAtual, NotaMusicalAnterior;
@@ -104,7 +115,14 @@ public class TradutorDeTextoEmMusica {
 			}
 			else {
 				if (isNotaMusicalPura(NotaMusicalAtual)) {
-					NotaMusicalAtual += configOitava.getOitavaMusical();
+					if(notaMusicalAceitaOitava(NotaMusicalAtual, configOitava.getOitavaMusical())) {
+						NotaMusicalAtual += configOitava.getOitavaMusical();
+					}
+					else {
+						configOitava.setOitavaDefault();
+						NotaMusicalAtual += configOitava.getOitavaMusical();
+						
+					}
 				}
 			}
 			

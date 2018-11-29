@@ -46,4 +46,8 @@ public class OitavaMusical {
 		return oitavaAtual;
 	}
 	
+	public void setOitavaDefault() {
+		oitavaAtual = OITAVA_DEFAULT;
+	}
+	
 }

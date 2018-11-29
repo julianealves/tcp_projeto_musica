@@ -108,8 +108,11 @@ public class TelaResultado implements Initializable {
 	}
 	
 	public void voltarTelaEntrada(ActionEvent event) {
+		AudioPlayer toBeFinished = dadosModel.getAudioPlayer();
+		
 		dadosModel.getJanela().setScene(dadosModel.telas.get(DadosModel.TelasID.TELA_ENTRADA));
 		dadosModel.getJanela().show();
+		toBeFinished.getManagedPlayer().finish();
 	}
 	
 }

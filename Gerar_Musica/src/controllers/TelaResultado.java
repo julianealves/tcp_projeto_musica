@@ -89,13 +89,14 @@ public class TelaResultado implements Initializable {
 	public void tocarMusica(ActionEvent event) {
 		
 		AudioPlayer player = dadosModel.getAudioPlayer();
-		Runnable controleMusica = new ControlePlayerThread(player);
+		
 		
 		if(iconePausarPlay.getGlyphName() == "PAUSE") {
 			iconePausarPlay.setGlyphName("PLAY");
 			player.pausaMusica();
 		}
 		else { // iconePausarPlay.getGlyphName() == "PLAY"
+			Runnable controleMusica = new ControlePlayerThread(player);
 			iconePausarPlay.setGlyphName("PAUSE");
 			if (!player.isPlaying()) {
 				new Thread(controleMusica).start();	

@@ -95,6 +95,18 @@ public class TradutorDeTextoEmMusica {
 		return aceitaOitava;
 	}
 	
+	private String adicionarOitavaMusical(String NotaMusicalAtual) {
+		if(notaMusicalAceitaOitava(NotaMusicalAtual, configOitava.getOitavaMusical())) {
+			NotaMusicalAtual += configOitava.getOitavaMusical();
+		}
+		else {
+			configOitava.setOitavaDefault();
+			NotaMusicalAtual += configOitava.getOitavaMusical();
+			
+		}
+		return NotaMusicalAtual;
+	}
+	
 	public String TraduzirTextoEmMusica(OitavaMusical oitavaPadrao) {
 		int TamanhoDoTexto;
 		String NotaMusicalAtual, NotaMusicalAnterior;
@@ -115,14 +127,7 @@ public class TradutorDeTextoEmMusica {
 			}
 			else {
 				if (isNotaMusicalPura(NotaMusicalAtual)) {
-					if(notaMusicalAceitaOitava(NotaMusicalAtual, configOitava.getOitavaMusical())) {
-						NotaMusicalAtual += configOitava.getOitavaMusical();
-					}
-					else {
-						configOitava.setOitavaDefault();
-						NotaMusicalAtual += configOitava.getOitavaMusical();
-						
-					}
+					NotaMusicalAtual = adicionarOitavaMusical(NotaMusicalAtual);
 				}
 			}
 			

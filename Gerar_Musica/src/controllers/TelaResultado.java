@@ -1,7 +1,18 @@
 package controllers;
 
+
+
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.sound.midi.Sequence;
+
+import org.jfugue.midi.MidiDefaults;
+import org.jfugue.player.ManagedPlayer;
+import org.jfugue.player.ManagedPlayerListener;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
@@ -12,6 +23,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import main.AudioPlayer;
 
 public class TelaResultado implements Initializable {
@@ -49,7 +61,7 @@ public class TelaResultado implements Initializable {
 	
 	private void criarConteudoTab(Text texto, Tab tab) {
 		StackPane paneTexto = new StackPane(texto);
-		StackPane.setMargin(textoOriginal, new Insets(15.0));
+		StackPane.setMargin(texto, new Insets(15.0));
 		
 		ScrollPane scrollPane = new ScrollPane();
 		
@@ -61,8 +73,17 @@ public class TelaResultado implements Initializable {
 	}
 	
 	public void salvarMusica(ActionEvent event) {
-		AudioPlayer audioPlayer = dadosModel.getAudioPlayer();
-		audioPlayer.salvarMusica();		
+		FileChooser janelaSalvar = new FileChooser();
+		
+		janelaSalvar.setTitle("Salvar arquivo MIDI");
+		janelaSalvar.setInitialDirectory(new File(System.getProperty("user.home")));
+		janelaSalvar.getExtensionFilters().add(new FileChooser.ExtensionFilter(".MIDI", "*.midi"));
+	
+		File arquivo = janelaSalvar.showSaveDialog(dadosModel.getJanela());
+		
+		if (arquivo != null) {
+            dadosModel.getAudioPlayer().SalvarMusica(arquivo);
+        }
 	}
 	
 	public void inicioMusica(ActionEvent event) {
@@ -74,28 +95,47 @@ public class TelaResultado implements Initializable {
 	}
 	
 	public void tocarMusica(ActionEvent event) {
-		
 		AudioPlayer player = dadosModel.getAudioPlayer();
 		Runnable controleMusica = new ControlePlayerThread(player);
 		
-		if(iconePausarPlay.getGlyphName() == "PAUSE") {
-			iconePausarPlay.setGlyphName("PLAY");
-			player.pausaMusica();
-		}
-		else { // iconePausarPlay.getGlyphName() == "PLAY"
-			iconePausarPlay.setGlyphName("PAUSE");
-			if (!player.isPlaying()) {
-				new Thread(controleMusica).start();	
+		ManagedPlayer controladorPlayer = player.getManagedPlayer();
+		controladorPlayer.addManagedPlayerListener(new ManagedPlayerListener() {
+			@Override
+			public void onFinished() {
+				trocarIcone(iconePausarPlay, "PLAY");
 			}
-			
-			
-		}
-				
+
+			@Override public void onPaused() {}
+			@Override public void onReset() {}
+			@Override public void onResumed() {}
+			@Override public void onSeek(long arg0) {}
+			@Override public void onStarted(Sequence arg0) {}
+		});
+		
+		if(iconePausarPlay.getGlyphName() == "PAUSE") {
+			trocarIcone(iconePausarPlay, "PLAY");
+			player.pausaMusica();
+		} else { // iconePausarPlay.getGlyphName() == "PLAY"
+			trocarIcone(iconePausarPlay, "PAUSE");
+			if (!player.isPlaying()) {
+				Thread thread = new Thread(controleMusica);
+				thread.setDaemon(true);
+				thread.start();
+			}
+		}	
 	}
 	
 	public void voltarTelaEntrada(ActionEvent event) {
+		trocarIcone(iconePausarPlay, "PLAY"); //garantir botao de play na proxima vez
+		
+		AudioPlayer toBeFinished = dadosModel.getAudioPlayer();
+		
 		dadosModel.getJanela().setScene(dadosModel.telas.get(DadosModel.TelasID.TELA_ENTRADA));
 		dadosModel.getJanela().show();
+		toBeFinished.getManagedPlayer().finish();
 	}
 	
+	private void trocarIcone(FontAwesomeIconView icone, String nomeIcone) {
+		icone.setGlyphName(nomeIcone);
+	}
 }

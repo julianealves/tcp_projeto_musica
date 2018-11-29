@@ -18,9 +18,6 @@ public class ControlePlayerThread implements Runnable{
 		//Enquanto a musica não acaba, player fica pendurado na thread
 		player.tocarMusica();
 		
-		//TODO:Implementar a troca de ui quando a música acaba (AQUI)
-		//iconePausarPlay.setGlyphName("PLAY");
-		
 	}
 
 }

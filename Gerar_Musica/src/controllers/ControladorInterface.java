@@ -4,9 +4,11 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 
@@ -59,6 +61,7 @@ public class ControladorInterface extends Application {
         } catch (IOException e) {
 			e.printStackTrace();
 		}
+        
 	}
 	
 	private FXMLLoader carregaTela(String nome) throws IOException {

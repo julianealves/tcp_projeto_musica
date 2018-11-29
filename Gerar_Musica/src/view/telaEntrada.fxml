@@ -57,7 +57,7 @@
                   <Insets bottom="150.0" right="220.0" />
                </StackPane.margin>
             </Line>
-            <JFXButton fx:id="arquivoButton" onAction="#carregarArquivo" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #6200EA;" text="Carregar arquivo" textAlignment="CENTER" textFill="WHITE" StackPane.alignment="CENTER_RIGHT">
+            <JFXButton fx:id="arquivoButton" onAction="#carregarArquivo" buttonType="RAISED" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #6200EA;" text="Carregar arquivo" textAlignment="CENTER" textFill="WHITE" StackPane.alignment="CENTER_RIGHT">
                <StackPane.margin>
                   <Insets bottom="150.0" left="50.0" right="50.0" top="50.0" />
                </StackPane.margin>

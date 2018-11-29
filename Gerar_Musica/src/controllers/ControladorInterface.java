@@ -57,6 +57,7 @@ public class ControladorInterface extends Application {
 			dadosModel.addTela(DadosModel.TelasID.TELA_RESULTADO, telaResultado);
 			
 			janela.setScene(telaEntrada);
+			janela.setY(0);
 			janela.show();
         } catch (IOException e) {
 			e.printStackTrace();

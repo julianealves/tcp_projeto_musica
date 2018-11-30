@@ -1,7 +1,7 @@
 package controllers;
 
 
-
+import org.jfugue.Player;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -10,9 +10,6 @@ import java.util.TimerTask;
 
 import javax.sound.midi.Sequence;
 
-import org.jfugue.midi.MidiDefaults;
-import org.jfugue.player.ManagedPlayer;
-import org.jfugue.player.ManagedPlayerListener;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
@@ -98,19 +95,8 @@ public class TelaResultado implements Initializable {
 		AudioPlayer player = dadosModel.getAudioPlayer();
 		Runnable controleMusica = new ControlePlayerThread(player);
 		
-		ManagedPlayer controladorPlayer = player.getManagedPlayer();
-		controladorPlayer.addManagedPlayerListener(new ManagedPlayerListener() {
-			@Override
-			public void onFinished() {
-				trocarIcone(iconePausarPlay, "PLAY");
-			}
-
-			@Override public void onPaused() {}
-			@Override public void onReset() {}
-			@Override public void onResumed() {}
-			@Override public void onSeek(long arg0) {}
-			@Override public void onStarted(Sequence arg0) {}
-		});
+	
+		
 		
 		if(iconePausarPlay.getGlyphName() == "PAUSE") {
 			trocarIcone(iconePausarPlay, "PLAY");
@@ -132,8 +118,8 @@ public class TelaResultado implements Initializable {
 		
 		dadosModel.getJanela().setScene(dadosModel.telas.get(DadosModel.TelasID.TELA_ENTRADA));
 		dadosModel.getJanela().show();
-		toBeFinished.getManagedPlayer().finish();
-	}
+		toBeFinished.getPlayer().close();	
+		}
 	
 	private void trocarIcone(FontAwesomeIconView icone, String nomeIcone) {
 		icone.setGlyphName(nomeIcone);

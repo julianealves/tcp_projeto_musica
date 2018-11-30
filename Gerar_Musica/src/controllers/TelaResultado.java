@@ -1,14 +1,13 @@
 package controllers;
 
 
-import org.jfugue.Player;
+
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import javax.sound.midi.Sequence;
+
+
 
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;

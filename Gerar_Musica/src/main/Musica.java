@@ -179,13 +179,19 @@ public class Musica {
 		
 	}
 	
+	private void codificaVolumeInicialJFugue() {
+		codificacaoJFugue = "X[Volume]=" + volume.getVolume() + " " + codificacaoJFugue;
+	}
+	
 	public void recodificacaoJFugue(TradutorDeTextoEmMusica codificador) {
 		codificador.setTextoBruto(textoBruto);
-		codificacaoJFugue = codificador.TraduzirTextoEmMusica(oitava);
-		codificacaoJFugue = "X[Volume]=" + volume.getVolume() + " " + codificacaoJFugue;
+		codificaVolumeInicialJFugue();
+		codificacaoJFugue += codificador.TraduzirTextoEmMusica(oitava);
 		ajustaRitmo();
 		ajustaVolume();
 		ajustaInstrumentoMusical();		
 	}
+
+	
 
 }

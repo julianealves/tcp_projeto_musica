@@ -1,53 +1,50 @@
 package main;
-//import org.jfugue.*;
+
+import org.jfugue.Player;
+
 import java.io.File;
 import java.io.IOException;
 
-import org.jfugue.pattern.Pattern;
-import org.jfugue.player.ManagedPlayer;
-import org.jfugue.player.Player;
-import org.jfugue.midi.MidiFileManager;
 
 public class AudioPlayer {
 	private Musica Musica;
 	private Player player;
-	private Pattern musicaPadronizada;
+	private String musicaPadronizada;
 	
 	public AudioPlayer(Musica Musica) {
 		this.Musica = Musica;
 		player = new Player();
 		String musica = this.Musica.getCodificacaoJFugue();
-		musicaPadronizada = new Pattern(musica); 
+		musicaPadronizada = new String(musica); 
 	}
 	
 	public void tocarMusica() {
-		ManagedPlayer controle = player.getManagedPlayer();
 		
-		if (controle.isPaused()) {
-			controle.resume();
+		if (player.isPaused()) {
+			player.resume();
 		}
 		
-		else if (!controle.isStarted()) {
-			player.delayPlay(100, musicaPadronizada);
+		else if (!player.isStarted()) {
+			player.play(musicaPadronizada);
 		}
 		
 		else {
 			player = new Player();
-			player.delayPlay(100, musicaPadronizada);
+			player.play(musicaPadronizada);
 		}
 	}
 	
 	public void pausaMusica() {
-		ManagedPlayer controle = player.getManagedPlayer();
-		if (controle.isPlaying()) {
-			controle.pause();
+		
+		if (player.isPlaying()) {
+			player.pause();
 		}
 		
 	}
 
 	public void SalvarMusica(File arquivo) {
 		try {
-			MidiFileManager.savePatternToMidi(musicaPadronizada, arquivo);
+			player.saveMidi(musicaPadronizada, arquivo);
 			System.out.println("Arquivo salvo");
 		} catch (IOException e)
 		{
@@ -56,11 +53,13 @@ public class AudioPlayer {
 	}
 	
 	public boolean isPlaying() {
-		ManagedPlayer playerControl = player.getManagedPlayer();
-		return playerControl.isPlaying();
+	
+		return player.isPlaying();
 	}
 	
-	public ManagedPlayer getManagedPlayer() {
-		return player.getManagedPlayer();
+	public Player getPlayerJFugue () {
+		return player;
 	}
+	
+	
 }

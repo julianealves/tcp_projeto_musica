@@ -67,7 +67,7 @@ public class TelaEntrada implements Initializable {
 		}
 	}
 	
-	private void gerarMusica() {
+	private String escolherEntrada() {
 		String texto = new String("ERRO: Nao conseguiu buscar o texto!");
 		if (caixaTextoVazia(caixaTexto.getText())) {
 			byte[] textoCodificado;
@@ -80,6 +80,11 @@ public class TelaEntrada implements Initializable {
 		} else {
 			texto = caixaTexto.getText();
 		}
+		return texto;
+	}
+	
+	private void gerarMusica() {
+		String texto = escolherEntrada();
 		
 		dadosModel.setTextoOriginal(texto);
 		dadosModel.setMusica(texto);

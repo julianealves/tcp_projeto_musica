@@ -19,8 +19,11 @@ public class ControlePlayerThread implements Runnable{
 		//Player fica tocando a música
 		player.tocarMusica();
 		
-		//Quando acaba de tocar
-		iconeASerTrocado.setGlyphName("PLAY");
+		//Quando acaba de tocar ou é pausado.
+		if(player.getPlayerJFugue().isFinished()) {
+			iconeASerTrocado.setGlyphName("PLAY");
+		}
+		
 		
 	}
 

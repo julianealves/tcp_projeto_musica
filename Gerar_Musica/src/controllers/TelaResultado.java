@@ -118,7 +118,7 @@ public class TelaResultado implements Initializable {
 		
 		dadosModel.getJanela().setScene(dadosModel.telas.get(DadosModel.TelasID.TELA_ENTRADA));
 		dadosModel.getJanela().show();
-		toBeFinished.getPlayer().close();	
+		toBeFinished.getPlayerJFugue().close();	
 		}
 	
 	private void trocarIcone(FontAwesomeIconView icone, String nomeIcone) {

@@ -57,7 +57,7 @@ public class AudioPlayer {
 		return player.isPlaying();
 	}
 	
-	public Player getPlayer () {
+	public Player getPlayerJFugue () {
 		return player;
 	}
 	

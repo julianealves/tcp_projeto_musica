@@ -182,6 +182,7 @@ public class Musica {
 	public void recodificacaoJFugue(TradutorDeTextoEmMusica codificador) {
 		codificador.setTextoBruto(textoBruto);
 		codificacaoJFugue = codificador.TraduzirTextoEmMusica(oitava);
+		codificacaoJFugue = "X[Volume]=" + volume.getVolume() + " " + codificacaoJFugue;
 		ajustaRitmo();
 		ajustaVolume();
 		ajustaInstrumentoMusical();		

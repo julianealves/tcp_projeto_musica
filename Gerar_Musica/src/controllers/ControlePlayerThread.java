@@ -6,7 +6,6 @@ import main.AudioPlayer;
 public class ControlePlayerThread implements Runnable{
 	
 	private AudioPlayer player;
-	private String actionToPerform;
 	
 	public ControlePlayerThread(AudioPlayer playerControlado) {
 		player = playerControlado;

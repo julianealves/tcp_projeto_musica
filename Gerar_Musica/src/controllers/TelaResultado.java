@@ -5,12 +5,8 @@ package controllers;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.sound.midi.Sequence;
-
-import org.jfugue.midi.MidiDefaults;
 import org.jfugue.player.ManagedPlayer;
 import org.jfugue.player.ManagedPlayerListener;
 

@@ -11,10 +11,14 @@ public class Musica {
 	private OitavaMusical oitava;
 	private InstrumentoMusical InstrumentoMusical;
 	
+	private final int VOLUME_DEFAULT = 1000;
+	private final int RITMO_DEFAULT = 4;
+	private final int OITAVA_DEFAULT = 5;
+	
 	public Musica(String textoACodificar) {
-		volume =  new Volume(1000);
-		ritmo  =  new Ritmo(0);
-		oitava =  new OitavaMusical(5);
+		volume =  new Volume(VOLUME_DEFAULT);
+		ritmo  =  new Ritmo(RITMO_DEFAULT);
+		oitava =  new OitavaMusical(OITAVA_DEFAULT);
 		InstrumentoMusical = new InstrumentoMusical();
 		codificacaoJFugue = "";
 		
@@ -57,7 +61,8 @@ public class Musica {
 		boolean finalizarProcura = false;
 		
 		indice = indiceInicialMudanca + 5;
-		
+		System.out.println(codificacaoJFugue);
+		System.out.println(indiceInicialMudanca);
 		while(!finalizarProcura) {
 			if(codificacaoJFugue.charAt(indice) != '_') {
 				fator = fator + codificacaoJFugue.charAt(indice);				

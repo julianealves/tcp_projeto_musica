@@ -86,14 +86,6 @@ public class TelaResultado implements Initializable {
         }
 	}
 	
-	public void inicioMusica(ActionEvent event) {
-		
-	}
-	
-	public void fimMusica(ActionEvent event) {
-		
-	}
-	
 	public void tocarMusica(ActionEvent event) {
 		AudioPlayer player = dadosModel.getAudioPlayer();
 		Runnable controleMusica = new ControlePlayerThread(player);
